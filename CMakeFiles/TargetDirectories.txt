@@ -1,0 +1,7 @@
+/home/gavin4d/programming/Multiscale-Curvature-Analysis/CMakeFiles/main.dir
+/home/gavin4d/programming/Multiscale-Curvature-Analysis/CMakeFiles/analysis.dir
+/home/gavin4d/programming/Multiscale-Curvature-Analysis/CMakeFiles/dataContainer.dir
+/home/gavin4d/programming/Multiscale-Curvature-Analysis/CMakeFiles/fileConvert.dir
+/home/gavin4d/programming/Multiscale-Curvature-Analysis/CMakeFiles/gui.dir
+/home/gavin4d/programming/Multiscale-Curvature-Analysis/CMakeFiles/edit_cache.dir
+/home/gavin4d/programming/Multiscale-Curvature-Analysis/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,2 @@
+/nix/store/vh9fsdhgxcnab2qk7vdp2palkkn6j3cp-gcc-wrapper-13.3.0/bin/ar qc libfileConvert.a CMakeFiles/fileConvert.dir/fileConvert.cpp.o
+/nix/store/vh9fsdhgxcnab2qk7vdp2palkkn6j3cp-gcc-wrapper-13.3.0/bin/ranlib libfileConvert.a
