@@ -7,7 +7,7 @@ const double PI = 3.14159265358979323846;
 class Formula{
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this fucntion follows Heron's formula for cuvature---------------------------------------------------------------------
-    double Herons (double x1, double z1, double x2, double z2, double x3, double z3){
+    double herons (double x1, double z1, double x2, double z2, double x3, double z3){
         double curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
 
         ABX = x1-x2;
@@ -47,7 +47,7 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows a calculus method for determining curvature------------------------------------------------------
-    double Parabola (double x1, double z1, double x2, double z2, double x3, double z3){
+    double parabola (double x1, double z1, double x2, double z2, double x3, double z3){
         double curve, result_a, result_b, first_deriv, second_deriv;
         
         // Defining the matrix Equations (MatrixA)
@@ -66,9 +66,9 @@ class Formula{
         Eigen::VectorXd Result = Equations.colPivHouseholderQr().solve(SolveFor);
         
         // Visual representation of equation being solved:
-        // [x1^2  x1  1 ] [x0] = z1
-        // [x2^2  x2  1 ] [x1] = z2
-        // [x3^2  x3  1 ] [x2] = z3
+        // [x1^2  x1  1 ] [xa]  [z1]
+        // [x2^2  x2  1 ] [xb] =[z2]
+        // [x3^2  x3  1 ] [xc]  [z3]
 
         //----------------------------------------------------------------------------------------------------------------
         // extracting needed values for for equation
@@ -99,7 +99,7 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows difference of slopes method for determining curvature--------------------------------------------
-    double Diff_of_Slopes (double x1, double z1, double x2, double z2, double x3, double z3){
+    double diffOfSlopes (double x1, double z1, double x2, double z2, double x3, double z3){
         double curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
         
         ABX = x1-x2;
@@ -138,14 +138,14 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows the 3-ordinate Lagrangian method in order to determine curvature---------------------------------
-    double Lagrangian (double x1, double z1, double x2, double z2, double x3, double z3){
+    double lagrangian (double x1, double z1, double x2, double z2, double x3, double z3){
         // Proper data hould never divide by 0
         return  (2*(z1)-(z2)-(z3))/pow((((x3) - (x1))/2), 2);
     }
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows the Finite Difference Analysis method in order to determine curvature----------------------------
-    double Finite_Diff_Analysis (double x1, double z1, double x2, double z2, double x3, double z3){
+    double finiteDiffAnalysis (double x1, double z1, double x2, double z2, double x3, double z3){
         double zPrime, zDoublePrime;
         // Proper data hould never divide by 0
 

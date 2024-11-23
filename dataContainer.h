@@ -5,6 +5,13 @@
 * 
 */
 
+// Point data type to store x value and z value
+typedef struct{
+	double x;
+	double z;
+		
+}point;
+
 // This struct stores an array of curvatures and the scale at whitch they were calculated
 class curvatureScale {
 
@@ -42,10 +49,9 @@ class curvatureScale {
  private:
   double scale;
   double* curvatureArray;
+  point* pointArray;
   int dataLength;
 
-  double positionStep;
-  double positionStart;  
 };
 
 class dataContainer {
