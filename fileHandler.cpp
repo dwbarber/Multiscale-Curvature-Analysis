@@ -10,22 +10,24 @@ point* FileHandler::read(std::string fileName){
     double xval,zval;
     vector<point> import;
     point a;
-    double doublezerostoignore;
-    int nameororderofpoints;//ask abt numbers and stuff in example file
+    double doubletoignore;
+    int nameOrorderofpoints;//ask abt numbers and stuff in example file
     std::string lastLineBefInput;
     while(!input.eof()&&(lastLineBefInput!="// X,Y,Z,C,Lock")){//forgot what i need to do to make// work in a stringor if its just\\ 
         getline(input, lastLineBefInput);//might need to use .ignore bc reading lines but delete comment if works as is
-
     }
     while(!input.eof()){
-        input>>xval;
-        input>>nameororderofpoints;
-        input>>zval;
-        input>>nameororderofpoints;
+        input >> nameOrorderofpoints;
+        input >> xval;
+        input >> doubletoignore;
+        input >> zval;
+        input >> doubletoignore;
+        input >> nameOrorderofpoints;
         a.x=xval;
         a.z=zval;
-        import.append(a);
+        import.push_back(a);
     }
-    //might need to point* = new point[]=import;
-
+    point* array=new point[import.size()];
+    array*= import;
+    return array;
 }

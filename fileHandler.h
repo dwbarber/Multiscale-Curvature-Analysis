@@ -3,6 +3,7 @@
 #include<string>
 #include<fstream>
 #include<vector>
+using std::vector;
 class FileHandler{
 
 	int validateType();
