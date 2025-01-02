@@ -1,20 +1,19 @@
 #include"fileHandler.h"
 #ifndef DATACONTAINER_CPP
 #define DATACONTAINER_CPP
-
+using std:string;
 point* FileHandler::read(std::string fileName){
     if(!ifstream input.open(fileName)){
         //throw error maybe?
     }
-    //if() what should i check for? file type any iterations that cant be looped/info thats important
     double xval,zval;
     vector<point> import;
     point a;
-    double doubletoignore;
-    int nameOrorderofpoints;//ask abt numbers and stuff in example file
-    std::string lastLineBefInput;
-    while(!input.eof()&&(lastLineBefInput!="// X,Y,Z,C,Lock")){//forgot what i need to do to make// work in a stringor if its just\\ 
-        getline(input, lastLineBefInput);//might need to use .ignore bc reading lines but delete comment if works as is
+    double doubletoignore;//there is unnecessary doubles that are just zero
+    int nameOrorderofpoints;//there are int val inputs to ignore in each line
+    string lastLineBefInput;
+    while(!input.eof()&&(lastLineBefInput.std::find("// X,Y,Z,C,Lock")!=string::npos)){//"// X,Y,Z,C,Lock" is the last line before data
+        getline(input, lastLineBefInput);
     }
     while(!input.eof()){
         input >> nameOrorderofpoints;
@@ -27,7 +26,8 @@ point* FileHandler::read(std::string fileName){
         a.z=zval;
         import.push_back(a);
     }
-    point* array=new point[import.size()];
-    array*= import;
+    input.close();
+    point* array=new point[import.size()];//make so array doesnt get deleted after function ends
+    *array= import;
     return array;
 }

@@ -1,5 +1,8 @@
 #ifdef FILEHANDLER_H
 #define FILEHANDLER_H
+#ifndef DATACONTAINER_CPP
+#define DATACONTAINER_CPP
+
 #include<string>
 #include<fstream>
 #include<vector>
