@@ -13,22 +13,22 @@ typedef struct{
 }point;
 
 // This struct stores an array of curvatures and the scale at whitch they were calculated
-class curvatureScale {
+class CurvatureScale {
 
     public:
 
         // constructors
-        curvatureScale();
-        curvatureScale(double* curvatureArray, int dataLength, double scale, double positionStep, double positionStart);
+        CurvatureScale() {};
+        CurvatureScale(double *curvatureArray, int dataLength, double scale, point *pointArray);
 
         // destructor
-        ~curvatureScale();
+        ~CurvatureScale();
         
         // getters
         double getCurvature(int index);
         double getScale();
         int getLength();
-        double getPosition(int index);
+        point getPoint(int index);
         
         //----------------------------------------------------------------------------------------------------------------
         // setters
@@ -37,7 +37,7 @@ class curvatureScale {
         void setCurvatureArray(double* curvatureArray, int dataLength);
         
         // sets curvature at index
-        void setCurvature(int index);
+        void setCurvature(double curvature, int index);
         
         /**
         * Function: setScale()
@@ -54,35 +54,35 @@ class curvatureScale {
 
 };
 
-class dataContainer {
+class DataContainer {
 
     public:
 
         // Constructors 
-        dataContainer();
-        dataContainer(double* heightArray, int dataLength);
+        DataContainer();
+        DataContainer(point* pointArray, int dataLength);
         
         // Destructor deletes the arrays and pointers so memory is not leaked
-        ~dataContainer ();
+        ~DataContainer ();
         
         // getters
-        curvatureScale* getIndex(int index);
-        curvatureScale* getScale(double scale);
-        double getHeight(int index);
+        CurvatureScale* getIndex(int index);
+        CurvatureScale* getScale(double scale);
+        point getPoint(int index);
         
         // setters
-        void setIndex(int index, curvatureScale* data);
-        void putData(int index, curvatureScale* data);
-        void setHeightArray(double* heightArray, int dataLength);
-        void setHeight(int index, double height);
-         
+        void setIndex(int index, CurvatureScale* data);
+        // void putData(int index, CurvatureScale* data);
+        void setPointArray(point *pointArray, int dataLength);
+        void setPoint(int index, point point);
+        
     private:
         // This array stores the height data from input file
-        double* heightDataArray;
-        int hightArrayLength;
+        point* pointArray;
+        int pointArrayLength;
         
         // This array stores a list of curvature scale objects. Each object stores the curvature array at a scale
-        curvatureScale** curvatureArray;
+        CurvatureScale** curvatureArray;
         int curvatureArrayLength;
   
 };
