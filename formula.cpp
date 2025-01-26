@@ -7,7 +7,7 @@ const double PI = 3.14159265358979323846;
 class Formula{
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this fucntion follows Heron's formula for cuvature---------------------------------------------------------------------
-    double Herons (double x1, double z1, double x2, double z2, double x3, double z3){
+    double herons (double x1, double z1, double x2, double z2, double x3, double z3){
         double curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
 
         ABX = x1-x2;
@@ -47,7 +47,7 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows a calculus method for determining curvature------------------------------------------------------
-    double Parabola (double Ax, double Az, double Bx, double Bz, double Cx, double Cz){
+    double parabola (double Ax, double Az, double Bx, double Bz, double Cx, double Cz){
         double a, b, c, Axpow2, Bxpow2, Cxpow2, detM, detMa, detMb, detMc, curve, first_deriv, second_deriv;
         
         // Creating variables representative of this matrix (Matrix M):
@@ -108,7 +108,7 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows difference of slopes method for determining curvature--------------------------------------------
-    double Diff_of_Slopes (double x1, double z1, double x2, double z2, double x3, double z3){
+    double diffOfSlopes (double x1, double z1, double x2, double z2, double x3, double z3){
         double curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
         
         ABX = x1-x2;
@@ -149,7 +149,7 @@ class Formula{
 // this function follows the 3-ordinate Lagrangian method in order to determine curvature---------------------------------
     double lagrangian (double x1, double z1, double x2, double z2, double x3, double z3){
         // Proper data hould never divide by 0
-        return  (2*(z1)-(z2)-(z3))/pow((((x3) - (x1))/2), 2);
+        return  ((2 * (z1))-(z2)-(z3))/pow((((x3) - (x1))/2), 2);
     }
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
@@ -183,7 +183,7 @@ class Formula{
         //----------------------------------------------------------------------------------------------------------------
         // Calculate the angle, multiplied by 180/PI to translate to degrees
 
-        angle = (std::atan(std::abs((slope2 - slope1) / (1 + slope1 * slope2)))) * (180/PI);;
+        angle = (std::atan(std::abs((slope2 - slope1) / (1 + (slope1 * slope2))))) * (180/PI);;
 
         return (angle < 90.00);
     }
