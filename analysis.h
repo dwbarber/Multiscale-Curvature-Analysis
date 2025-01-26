@@ -6,7 +6,7 @@
 //extension of dataContainer class to include analysis functions
 class analysis{
     public:
-        void singleAnalysis(int numPoints, int minScale, int maxScale, point pointArray[], curvatureScale cuvatureScaleArray[]);
+        void singleAnalysis(int *method, int numPoints, int minScale, int maxScale, point pointArray[], CurvatureScale cuvatureScaleArray[]);
         void hybridAnalysis();
 };
 

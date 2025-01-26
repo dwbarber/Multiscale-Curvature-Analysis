@@ -1,9 +1,12 @@
-#include"fileHandler.h"
-#ifndef DATACONTAINER_CPP
-#define DATACONTAINER_CPP
-using std:string;
-point* FileHandler::read(std::string fileName){
-    if(!ifstream input.open(fileName)){
+#include "fileHandler.h"
+#include "dataContainer.h"
+#include <fstream>
+#include <string>
+using namespace std;
+
+point* FileHandler::read(string fileName){
+    ifstream input;
+    if(!input.open(fileName)){
         //throw error maybe?
     }
     double xval,zval;

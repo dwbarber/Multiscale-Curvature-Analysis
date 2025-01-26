@@ -69,9 +69,9 @@ void DataContainer::setIndex(int index, CurvatureScale* data) {
     curvatureArray[index] = data;
 }
 
-void DataContainer::putData(int index, CurvatureScale* data) {
+// void DataContainer::putData(int index, CurvatureScale* data) {
     
-}
+// }
 
 void DataContainer::setPointArray(point *pointArray, int dataLength) {
     delete[] DataContainer::pointArray;
