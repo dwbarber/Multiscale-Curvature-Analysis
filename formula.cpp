@@ -1,13 +1,13 @@
 #include <iostream>
 #include <cmath>
-#include <Eigen/Dense> // https://gitlab.com/libeigen/eigen/-/releases/3.4.0 // to download library
+//#include <Eigen/Dense> // https://gitlab.com/libeigen/eigen/-/releases/3.4.0 // to download library
 
 const double PI = 3.14159265358979323846;
 
 class Formula{
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this fucntion follows Heron's formula for cuvature---------------------------------------------------------------------
-    double herons (double x1, double z1, double x2, double z2, double x3, double z3){
+    double Herons (double x1, double z1, double x2, double z2, double x3, double z3){
         double curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
 
         ABX = x1-x2;
@@ -47,50 +47,59 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows a calculus method for determining curvature------------------------------------------------------
-    double parabola (double x1, double z1, double x2, double z2, double x3, double z3){
-        double curve, result_a, result_b, first_deriv, second_deriv;
+    double Parabola (double Ax, double Az, double Bx, double Bz, double Cx, double Cz){
+        double a, b, c, Axpow2, Bxpow2, Cxpow2, detM, detMa, detMb, detMc, curve, first_deriv, second_deriv;
         
-        // Defining the matrix Equations (MatrixA)
-        Eigen::MatrixXd Equations(3, 3);
-        Equations << pow(x1, 2), x1, 1, // x1^2 + x1 + 1
-                     pow(x2, 2), x2, 1, // x2^2 + x2 + 1
-                     pow(x3, 2), x3, 1; // x3^2 + x3 + 1
+        // Creating variables representative of this matrix (Matrix M):
+
+        // [Ax^2  Ax  1 ] [a]   [Az]
+        // [Bx^2  Bx  1 ] [b] = [Bz]
+        // [Cx^2  Cx  1 ] [c]   [Cz]
+
+        // A^2
+        Axpow2 = pow(Ax, 2);
+        
+        // B^2
+        Bxpow2 = pow(Bx, 2);
+        
+        // C^2
+        Cxpow2 = pow(Cx, 2);
 
         //----------------------------------------------------------------------------------------------------------------
-        // Define the vector or matrix SolveFor (B)
-        Eigen::VectorXd SolveFor(3);
-        SolveFor << z1, z2, z3;
+        // first portion of the algorithm is solving for a, b, and c
 
-        //----------------------------------------------------------------------------------------------------------------
-        // Solve for Result (x) in Equation result (MatrixA x) = SolveFor (B)
-        Eigen::VectorXd Result = Equations.colPivHouseholderQr().solve(SolveFor);
+        // det(M)
+        detM = (Axpow2 * (Bx - Cx)) - (Ax * (Bxpow2 - Cxpow2)) + ((Bxpow2 * Cx) - (Bx * Cxpow2));
         
-        // Visual representation of equation being solved:
-        // [x1^2  x1  1 ] [xa]  [z1]
-        // [x2^2  x2  1 ] [xb] =[z2]
-        // [x3^2  x3  1 ] [xc]  [z3]
+        // det(Ma)
+        detMa = (Az * (Bx - Cx)) - (Ax * (Bz - Cz)) + ((Bz * Cx) - (Bx * Cz));
+        
+        // det(Mb)
+        detMb = (Axpow2 * (Bz - Cz)) - (Az * (Bxpow2 - Cxpow2)) + ((Bxpow2 * Cz) - (Bz * Cxpow2));
+        
+        // det(Mc)
+        detMc = (Axpow2 * ((Bx * Cz) - (Bx * Cx))) - (Ax * ((Bxpow2 * Cz) - (Bz * Cxpow2))) + (Az * ((Bxpow2 * Cx) - (Bx * Cxpow2)));
 
-        //----------------------------------------------------------------------------------------------------------------
-        // extracting needed values for for equation
-        
-        result_a = Result(0);
-        result_b = Result(1);
+        // Solve for a, b and C
+        a = detMa/detM;
+        b = detMb/detM;
+        c = detMc/detM;
 
         //----------------------------------------------------------------------------------------------------------------
         // finding first and second derivative equivalents to find curvature value
 
-        first_deriv = 2 * result_a * x2 + result_b;
-        second_deriv = 2 * result_a;
+        first_deriv = 2 * a * Bx + b;
+        second_deriv = 2 * a;
         curve = (4 * ((std::abs(second_deriv))/(pow((1 + pow(first_deriv, 2)), 1.5))));
 
         //----------------------------------------------------------------------------------------------------------------
         // sign of curvature determined by comparing the average of extreme heights with the central height
 
-        if (((z3 + z1) / 2) < z2){ // curve is negative
+        if (((Cz + Az) / 2) < Bz){ // curve is negative
             return -1 * curve;
         }
 
-        else if (((z3 + z1) / 2) == z2){ // there is no curve 
+        else if (((Cz + Az) / 2) == Bz){ // there is no curve 
             return 0;
         }
 
@@ -99,7 +108,7 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows difference of slopes method for determining curvature--------------------------------------------
-    double diffOfSlopes (double x1, double z1, double x2, double z2, double x3, double z3){
+    double Diff_of_Slopes (double x1, double z1, double x2, double z2, double x3, double z3){
         double curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
         
         ABX = x1-x2;
