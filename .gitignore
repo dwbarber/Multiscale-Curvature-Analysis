@@ -37,3 +37,8 @@ main
 *.cmake
 CMakeCache.txt
 Makefile
+
+# vim swp files
+*.swp
+*.swo
+*.swn
