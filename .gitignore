@@ -42,3 +42,4 @@ Makefile
 *.swp
 *.swo
 *.swn
+./build/
