@@ -1,7 +1,5 @@
 #ifdef FILEHANDLER_H
 #define FILEHANDLER_H
-#ifndef DATACONTAINER_CPP
-#define DATACONTAINER_CPP
 
 #include<string>
 #include<fstream>
@@ -15,6 +13,6 @@ class FileHandler{
 
 	point* read(std::string fileName);
 
-}
+};
 
 #endif

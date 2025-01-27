@@ -84,7 +84,6 @@ class DataContainer {
         // This array stores a list of curvature scale objects. Each object stores the curvature array at a scale
         CurvatureScale** curvatureArray;
         int curvatureArrayLength;
-        std::string analysisMethod; //stores the desired analysis method
   
 };
 
