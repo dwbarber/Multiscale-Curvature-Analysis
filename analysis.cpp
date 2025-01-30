@@ -1,36 +1,64 @@
 #include "analysis.h"
 #include "formula.cpp"
+#include "uiContainer.h"
+#include "datacontainer.h"
 #include <iostream>
 #include <unordered_map>
 #include <string>
 #include <functional>
 #include <stdexcept>
 
-void analysis::singleAnalysis(DataContainer& data, double (*method)(double, double, double, double, double, double), int numPoints, int minScale, int maxScale){
+void analysis::singleAnalysis(UserInput& uInput, DataContainer& data, double (*method)(point,point,point), int minScale, int maxScale){
+    //inputs: data, pointer to desired analysis method
 
     std::cout << "Single Analysis" << std::endl;
         
     //populate cuvatureScaleArray
     double curvature;
+    int numPoints = data.getPointArrayLength();
+    int minScale = uInput.getMinScale();
+    int maxScale = uInput.getMaxScale();
 
     for(int scale = minScale; scale <= maxScale; scale++){ //iterate over scales
         for(int point = scale; point < numPoints - scale; point++){ //iterate over points
             // point is the center point 
             // Call the function on the points
-            curvature = method(
-                data.getPoint(point - scale).x, data.getPoint(point - scale).z, 
-                data.getPoint(point).x, data.getPoint(point).z, 
-                data.getPoint(point + scale).x, data.getPoint(point + scale).z ); 
+            curvature = method( data.getPoint(point - scale), data.getPoint(point), data.getPoint(point + scale)); 
 
             data.putData(scale, point, curvature); //add curvature to data
         }
     }
 }
 
-// //void dataContainer::hybridAnalysis() { //    std::cout << "Hybrid Analysis" << std::endl; // //    // Define a map of method names to corresponding functions //    static const std::unordered_map<std::string, std::function<double(double,double,double,double,double,double)>> functionKey = { //        {"herons", herons}, //        {"parabola", parabola}, //        {"diffslopes", diffOfSlopes}, //        {"lagrangian", lagrangian}, //        {"FDA", finiteDiffAnalysis} //    }; //    //    // Find the corresponding function //    auto it = functionKey.find(method); // //    if(it == functionKey.end()){ //        throw std::invalid_argument("Unknown method: " + method); //    } // //    //populate cuvatureScaleArray //    double curvature; // //    for(int scale = minScale; scale <= maxScale; scale++){ //iterate over scales //        for(int point = scale; point < numPoints - scale; point++){ //iterate over points //            // point is the center point //            // Call the function on the points //            curvature = it->second( //                pointArray[point - scale].x, pointArray[point - scale].z, 
-//                pointArray[point].x, pointArray[point].z, 
-//                pointArray[point + scale].x, pointArray[point + scale].z ); 
-//
-//        }
-//    }
-//}
+void analysis::hybridAnalysis(UserInput& uInput, DataContainer& data, double (*method1)(point,point,point), double (*method2)(point,point,point), int numPoints, int minScale, int maxScale){
+
+    std::cout << "Hybrid Analysis" << std::endl;
+        
+    //populate cuvatureScaleArray
+    double curvature;
+    int numPoints = data.getPointArrayLength();
+    int minScale = uInput.getMinScale();
+    int maxScale = uInput.getMaxScale();
+    
+    //determine if points are acute
+
+    for(int scale = minScale; scale <= maxScale; scale++){ //iterate over scales
+        for(int point = scale; point < numPoints - scale; point++){ //iterate over points
+            // point is the center point 
+            //determine weather points are acute or not
+            bool acute = Formula.isAcute(getPoint(point-scale),getPoint(point), getPoint(point+scale));
+
+            // Call the function on the points
+            if(acute){
+                curvature = method1( data.getPoint(point - scale), data.getPoint(point), data.getPoint(point + scale)); 
+
+            }
+            else{
+                curvature = method2( data.getPoint(point - scale), data.getPoint(point), data.getPoint(point + scale)); 
+
+            }
+
+            data.putData(scale, point, curvature); //add curvature to data
+        }
+    }
+}
