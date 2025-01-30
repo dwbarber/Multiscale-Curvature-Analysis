@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include "dataContainor.h"
+#include "dataContainer.h"
 //#include <Eigen/Dense> // https://gitlab.com/libeigen/eigen/-/releases/3.4.0 // to download library
 
 const double PI = 3.14159265358979323846;
@@ -156,7 +156,7 @@ class Formula{
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows the 3-ordinate Lagrangian method in order to determine curvature---------------------------------
     double lagrangian (point point1, point point2, point point3){
-        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z, 
+        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z; 
         // Proper data hould never divide by 0
         return  ((2 * (z1))-(z2)-(z3))/pow((((x3) - (x1))/2), 2);
     }
