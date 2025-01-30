@@ -1,14 +1,20 @@
 #include <iostream>
 #include <cmath>
+#include "dataContainor.h"
 //#include <Eigen/Dense> // https://gitlab.com/libeigen/eigen/-/releases/3.4.0 // to download library
 
 const double PI = 3.14159265358979323846;
+using namespace std;
+
 
 class Formula{
+    public:
+
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this fucntion follows Heron's formula for cuvature---------------------------------------------------------------------
-    double herons (double x1, double z1, double x2, double z2, double x3, double z3){
-        double curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
+    double herons (point point1, point point2, point point3){
+        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z, 
+               curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
 
         ABX = x1-x2;
         ABZ = z1-z2;
@@ -47,8 +53,9 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows a calculus method for determining curvature------------------------------------------------------
-    double parabola (double Ax, double Az, double Bx, double Bz, double Cx, double Cz){
-        double a, b, c, Axpow2, Bxpow2, Cxpow2, detM, detMa, detMb, detMc, curve, first_deriv, second_deriv;
+    double parabola (point point1, point point2, point point3){
+        double Ax = point1.x, Az = point1.z, Bx = point2.x, Bz = point2.z, Cx = point3.x, Cz = point3.z, 
+               a, b, c, Axpow2, Bxpow2, Cxpow2, detM, detMa, detMb, detMc, curve, first_deriv, second_deriv;
         
         // Creating variables representative of this matrix (Matrix M):
 
@@ -108,8 +115,9 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows difference of slopes method for determining curvature--------------------------------------------
-    double diffOfSlopes (double x1, double z1, double x2, double z2, double x3, double z3){
-        double curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
+    double diffOfSlopes (point point1, point point2, point point3){
+        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z, 
+               curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
         
         ABX = x1-x2;
         ABZ = z1-z2;
@@ -147,15 +155,17 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows the 3-ordinate Lagrangian method in order to determine curvature---------------------------------
-    double lagrangian (double x1, double z1, double x2, double z2, double x3, double z3){
+    double lagrangian (point point1, point point2, point point3){
+        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z, 
         // Proper data hould never divide by 0
         return  ((2 * (z1))-(z2)-(z3))/pow((((x3) - (x1))/2), 2);
     }
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows the Finite Difference Analysis method in order to determine curvature----------------------------
-    double finiteDiffAnalysis (double x1, double z1, double x2, double z2, double x3, double z3){
-        double zPrime, zDoublePrime;
+    double finiteDiffAnalysis (point point1, point point2, point point3){
+        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z, 
+               zPrime, zDoublePrime;
         // Proper data hould never divide by 0
 
         //----------------------------------------------------------------------------------------------------------------
@@ -171,8 +181,9 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows will run a formula to determine if the overall angle between points is acute or not -------------
-    bool isAcute (double x1, double z1, double x2, double z2, double x3, double z3){
-        double slope1, slope2, angle;
+    bool isAcute (point point1, point point2, point point3){
+        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z, 
+               slope1, slope2, angle;
 
         //----------------------------------------------------------------------------------------------------------------
         // calculating both slopes through this formula: (y2 - y1) / (x2 - x1)
@@ -187,5 +198,14 @@ class Formula{
 
         return (angle < 90.00);
     }
-
 };
+
+// for testing functions, software not dependent on this function
+// int main() {
+//     double curve;
+//     string output;
+//     Formula method;
+//     curve = method.diffOfSlopes(point1, point2, point3);
+//     cout << curve << endl;
+//     return 0;
+// }
