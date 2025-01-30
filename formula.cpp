@@ -12,8 +12,8 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this fucntion follows Heron's formula for cuvature---------------------------------------------------------------------
-    double herons (point point1, point point2, point point3){
-        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z, 
+    double herons (point *point1, point *point2, point *point3){
+        double x1 = point1->x, z1 = point1->z, x2 = point2->x, z2 = point2->z, x3 = point3->x, z3 = point3->z, 
                curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
 
         ABX = x1-x2;
@@ -53,8 +53,8 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows a calculus method for determining curvature------------------------------------------------------
-    double parabola (point point1, point point2, point point3){
-        double Ax = point1.x, Az = point1.z, Bx = point2.x, Bz = point2.z, Cx = point3.x, Cz = point3.z, 
+    double parabola (point *point1, point *point2, point *point3){
+        double Ax = point1->x, Az = point1->z, Bx = point2->x, Bz = point2->z, Cx = point3->x, Cz = point3->z, 
                a, b, c, Axpow2, Bxpow2, Cxpow2, detM, detMa, detMb, detMc, curve, first_deriv, second_deriv;
         
         // Creating variables representative of this matrix (Matrix M):
@@ -115,8 +115,8 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows difference of slopes method for determining curvature--------------------------------------------
-    double diffOfSlopes (point point1, point point2, point point3){
-        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z, 
+    double diffOfSlopes (point *point1, point *point2, point *point3){
+        double x1 = point1->x, z1 = point1->z, x2 = point2->x, z2 = point2->z, x3 = point3->x, z3 = point3->z,
                curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
         
         ABX = x1-x2;
@@ -155,16 +155,16 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows the 3-ordinate Lagrangian method in order to determine curvature---------------------------------
-    double lagrangian (point point1, point point2, point point3){
-        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z; 
+    double lagrangian (point *point1, point *point2, point *point3){
+        double x1 = point1->x, z1 = point1->z, x2 = point2->x, z2 = point2->z, x3 = point3->x, z3 = point3->z; 
         // Proper data hould never divide by 0
         return  ((2 * (z1))-(z2)-(z3))/pow((((x3) - (x1))/2), 2);
     }
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows the Finite Difference Analysis method in order to determine curvature----------------------------
-    double finiteDiffAnalysis (point point1, point point2, point point3){
-        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z, 
+    double finiteDiffAnalysis (point *point1, point *point2, point *point3){
+        double x1 = point1->x, z1 = point1->z, x2 = point2->x, z2 = point2->z, x3 = point3->x, z3 = point3->z, 
                zPrime, zDoublePrime;
         // Proper data hould never divide by 0
 
@@ -181,8 +181,8 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows will run a formula to determine if the overall angle between points is acute or not -------------
-    bool isAcute (point point1, point point2, point point3){
-        double x1 = point1.x, z1 = point1.z, x2 = point2.x, z2 = point2.z, x3 = point3.x, z3 = point3.z, 
+    bool isAcute (point *point1, point *point2, point *point3){
+        double x1 = point1->x, z1 = point1->z, x2 = point2->x, z2 = point2->z, x3 = point3->x, z3 = point3->z,
                slope1, slope2, angle;
 
         //----------------------------------------------------------------------------------------------------------------
