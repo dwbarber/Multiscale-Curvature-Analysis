@@ -1,4 +1,4 @@
-#include"dataContainer.h"
+#include "dataContainer.h"
 #include <cstring>
 
 CurvatureScale::CurvatureScale(double *curvatureArray, int dataLength, double scale, point *pointArray) {
@@ -43,17 +43,17 @@ void CurvatureScale::setScale(double scale) {
 }
 
 DataContainer::DataContainer(point* pointArray, int dataLength) {
-    
+    curvatureScaleArray = new CurvatureScale*[(dataLength*(dataLength+1))/2];
 }
 
 // Destructor deletes the arrays and pointers so memory is not leaked
 DataContainer::~DataContainer() {
-    
+    delete[] curvatureScaleArray;
 }
 
 // getters
 CurvatureScale* DataContainer::getIndex(int index) {
-    return curvatureArray[index];
+    return curvatureScaleArray[index];
 }
 
 // CurvatureScale* DataContainer::getScale(double scale){
@@ -64,9 +64,17 @@ point DataContainer::getPoint(int index) {
     return pointArray[index];
 }
 
+int DataContainer::getPointArrayLength() {
+    return pointArrayLength;
+}
+
+int DataContainer::getCurvatureArrayLength() {
+    return curvatureArrayLength;
+}
+
 // setters
 void DataContainer::setIndex(int index, CurvatureScale* data) {
-    curvatureArray[index] = data;
+    curvatureScaleArray[index] = data;
 }
 
 // void DataContainer::putData(int index, CurvatureScale* data) {
@@ -77,6 +85,8 @@ void DataContainer::setPointArray(point *pointArray, int dataLength) {
     delete[] DataContainer::pointArray;
     DataContainer::pointArray= new point[dataLength];
     memcpy(DataContainer::pointArray, pointArray, dataLength * sizeof(point));
+    delete[] curvatureScaleArray;
+    curvatureScaleArray = new CurvatureScale*[(dataLength*(dataLength+1))/2];
 }
 
 void DataContainer::setPoint(int index, point point) {
