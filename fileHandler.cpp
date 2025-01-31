@@ -31,7 +31,7 @@ point* FileHandler::read(string fileName){
     }
     input.close();
     point* array=new point[import.size()];//make so array doesnt get deleted after function ends
-    unsigned long long int a= import.size()// add long(s) if want to
+    unsigned long long int a= import.size()// add long(s) if number of points possible needs to be bigger
     unsigned long long int i=0;
     while(i < a){
         array[i]= import.at(i);
