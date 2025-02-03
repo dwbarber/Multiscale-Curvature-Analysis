@@ -68,11 +68,14 @@ class DataContainer {
         // getters
         CurvatureScale* getIndex(int index);
         CurvatureScale* getScale(double scale);
+        int getCurvatureArrayLength();
+
         point getPoint(int index);
+        int getPointArrayLength();
         
         // setters
         void setIndex(int index, CurvatureScale* data);
-        // void putData(int index, CurvatureScale* data);
+        void putData(int scale, int index, double curvature);
         void setPointArray(point *pointArray, int dataLength);
         void setPoint(int index, point point);
         
@@ -82,7 +85,7 @@ class DataContainer {
         int pointArrayLength;
         
         // This array stores a list of curvature scale objects. Each object stores the curvature array at a scale
-        CurvatureScale** curvatureArray;
+        CurvatureScale** curvatureScaleArray;
         int curvatureArrayLength;
   
 };
