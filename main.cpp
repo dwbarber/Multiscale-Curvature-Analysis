@@ -4,5 +4,5 @@
 #include"gui.h"
 
 int main() {
-  std::cout << "hello world";
+  std::cout << "This program was developed by Worcester Polytechnic Institute's Surface Metrology Lab.\nFor more information, please visit https://www.surfacemetrology.org/ and https://wp.wpi.edu/surfacemetrology/.\nThis software is distributed under the GPL-3.0 License.";
 }
