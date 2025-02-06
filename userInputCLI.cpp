@@ -23,6 +23,7 @@ int getInt(string message){
     catch (std::exception& e){
         std::cerr << "Integer Input Error" << e.what() << endl;
     }
+    return retVal;
 }
 
 double getDouble(string message){
@@ -36,13 +37,19 @@ double getDouble(string message){
     catch (std::exception& e){
         std::cerr << "Double Input Error" << e.what() << endl;
     }
+    return retVal;
 }
 
 bool getYesNo(string message){
-    cout << message << "\n";
+    cout << message << " (Yes/No)\n";
     string userInput;
     cin >> userInput;
-
+    if(userInput == "Yes"){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 
