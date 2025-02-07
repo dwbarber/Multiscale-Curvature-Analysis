@@ -6,8 +6,8 @@
 //extension of dataContainer class to include analysis functions
 class analysis{
     public:
-        void singleAnalysis(DataContainer& data, double (*method)(double, double, double, double, double, double), int numPoints, int minScale, int maxScale);
-        void analysis::hybridAnalysis(DataContainer& data, double (*method1)(double, double, double, double, double, double), double (*method2)(double, double, double, double, double, double), int numPoints, int minScale, int maxScale);
+        void singleAnalysis(userInputCLI& userInput ,DataContainer& data, double (*method)(double, double, double, double, double, double), int numPoints);
+        void analysis::hybridAnalysis(userInputCLI& userInput, DataContainer& data, double (*method1)(double, double, double, double, double, double), double (*method2)(double, double, double, double, double, double), int numPoints);
         void hybridAnalysis();
 };
 
