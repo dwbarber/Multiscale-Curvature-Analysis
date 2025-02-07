@@ -45,3 +45,4 @@ Makefile
 ./build/
 .vscode/settings.json
 ./build/*
+/build/*
