@@ -44,3 +44,4 @@ Makefile
 *.swn
 ./build/
 .vscode/settings.json
+./build/*
