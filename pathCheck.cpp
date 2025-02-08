@@ -4,18 +4,15 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include "pathCheck.h"
 
-
-bool validPath(std::string path){
+bool validPath(const std::string& path) {
     return std::filesystem::exists(path);
 }
 
-std::string pathExtension(std::string path){
+std::string pathExtension(const std::string& path) {
     return std::filesystem::path(path).extension().string();
 }
-
-
-
 
 std::vector<double> readCSV(std::string path){
     std::ifstream file(path);
@@ -29,10 +26,5 @@ std::vector<double> readCSV(std::string path){
             data.push_back(std::stod(value));
         }
     }
-
-
 }
-
-
-
 
