@@ -13,4 +13,4 @@ std::string pathExtension(const std::string& path);
 // Function to read a CSV file and return a vector of doubles
 std::vector<double> readCSV(const std::string& path);
 
-#endif // PATHCHECK_H
+#endif // PATHCHECK_H]
