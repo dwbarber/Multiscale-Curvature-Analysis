@@ -103,7 +103,7 @@ class FileHandler {
         std::cout << "Enter file Name: ";
         std::cin >> fileName;
         fileName += ".csv";
-        std::ofstream myFile(fileName); // Creates or overwrites example.txt
+        std::ofstream myFile(fileName); // Creates or overwrites file
     
         if (myFile.is_open()) {
             int ScaleSwitching = 0;
@@ -162,7 +162,7 @@ class FileHandler {
 
 };
 
-// for testing purposes
+//for testing purposes
 // int main() {
 //     FileHandler fh;
 //     fh.fileRead();
