@@ -1,5 +1,4 @@
-#ifndef USERINPUT_H
-#define USERINPUT_H
+
 #include <string>
 using namespace std;
 class UserInput{
@@ -31,4 +30,4 @@ class UserInput{
         bool logScale;
 };
 
-#endif
+
