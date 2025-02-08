@@ -1,9 +1,12 @@
 #include "dataContainer.h"
-#include "pathCheck.h"
+//#include "pathCheck.h"
 #include <fstream>
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <filesystem>
+#include <vector>
+
 using namespace std;
 
 class FileHandler {
@@ -81,7 +84,8 @@ class FileHandler {
 
         file.close(); 
 
-        // Print the points read from the file, use for TESTING
+        //Print the points read from the file and file type, use for TESTING
+        // std::cout << "File Type: " << pathExtension(filePath) << std::endl;
         // ite = 0;
         // while(ite < ArraySize){
         //     std::cout << "Point " << ite << ": " << pointArray[ite].x << ", " << pointArray[ite].z << std::endl;
@@ -129,6 +133,33 @@ class FileHandler {
     
         return 0;
     }
+
+//File checking:
+// Function to check if a file exists
+    bool validPath(const std::string& path) {
+        return std::filesystem::exists(path);
+    }
+
+// Function to get file extension
+    std::string pathExtension(const std::string& path) {
+        return std::filesystem::path(path).extension().string();
+    }
+
+// Function to read a CSV file and return a vector of doubles
+    // std::vector<double> readCSV(std::string path){
+    //     std::ifstream file(path);
+    //     std::string line;
+    //     std::vector<double> data;
+
+    //     while(std::getline(file, line) ){
+    //         std::stringstream ss(line);
+    //         std::string value;
+    //         while( std::getline(ss, value, ',') ){
+    //             data.push_back(std::stod(value));
+    //         }
+    //     }
+    // }
+
 };
 
 // for testing purposes
