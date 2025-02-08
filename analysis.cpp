@@ -1,6 +1,5 @@
 #include "analysis.h"
 #include "formula.cpp"
-#include "uiContainer.h"
 #include "datacontainer.h"
 #include <iostream>
 #include <unordered_map>
