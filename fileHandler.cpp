@@ -1,5 +1,4 @@
 #include "dataContainer.h"
-//#include "pathCheck.h"
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -30,7 +29,7 @@ class FileHandler {
         }
 
         // Check if the file extension is ".csv"
-        if (pathExtension(filePath) != ".csv") {
+        if (pathExtension(filePath) != ".csv" && pathExtension(filePath) != ".txt" && pathExtension(filePath) != ".x3p") {
             std::cerr << "Error: Invalid file type! Expected a .csv file." << std::endl;
             std::cerr << pathExtension(filePath) << std::endl;
             point* error = new point[1];
@@ -47,55 +46,56 @@ class FileHandler {
             error[0].z = -1;
             return error;
         }
-
-        // First loop: Count the number of lines
-        std::string line;
-        int ArraySize = 0;
-        while (std::getline(file, line)) {
-            ArraySize++;
-        }
-
-        // Reset file pointer
-        file.clear();               
-        file.seekg(0, ios::beg);    
-
-        // Allocate dynamic array
-        point* pointArray = new point[ArraySize];
-
-        // Second loop: Read data into array
-        int ite = 0;
-        
-        // Read each line from the file until EOF (end of file) is reached
-        while (std::getline(file, line)) {  
-            // Create a stringstream object from the line to parse values separately
-            std::stringstream ss(line);  
-            std::string x_str, z_str;  // Strings to store the extracted x and z values
-
-            // Extract values separated by a comma
-            // - Reads the first value (x) into x_str
-            // - Reads the second value (z) into z_str
-            if (std::getline(ss, x_str, ',') && std::getline(ss, z_str, ',')) {  
-                // Convert extracted string values to double and store in pointArray
-                pointArray[ite].x = std::stod(x_str);  
-                pointArray[ite].z = std::stod(z_str);
-                
-                // Increment index to store the next point in the array
-                ite++;  
+        else{
+            // First loop: Count the number of lines
+            std::string line;
+            int ArraySize = 0;
+            while (std::getline(file, line)) {
+                ArraySize++;
             }
+
+            // Reset file pointer
+            file.clear();               
+            file.seekg(0, ios::beg);    
+
+            // Allocate dynamic array
+            point* pointArray = new point[ArraySize];
+
+            // Second loop: Read data into array
+            int ite = 0;
+            
+            // Read each line from the file until EOF (end of file) is reached
+            while (std::getline(file, line)) {  
+                // Create a stringstream object from the line to parse values separately
+                std::stringstream ss(line);  
+                std::string x_str, z_str;  // Strings to store the extracted x and z values
+
+                // Extract values separated by a comma
+                // - Reads the first value (x) into x_str
+                // - Reads the second value (z) into z_str
+                if (std::getline(ss, x_str, ',') && std::getline(ss, z_str, ',')) {  
+                    // Convert extracted string values to double and store in pointArray
+                    pointArray[ite].x = std::stod(x_str);  
+                    pointArray[ite].z = std::stod(z_str);
+                    
+                    // Increment index to store the next point in the array
+                    ite++;  
+                }
+            }
+
+            file.close(); 
+
+            // //Print the points read from the file and file type, use for TESTING
+            // std::cout << "File Type: " << pathExtension(filePath) << std::endl;
+            // ite = 0;
+            // while(ite < ArraySize){
+            //     std::cout << "Point " << ite << ": " << pointArray[ite].x << ", " << pointArray[ite].z << std::endl;
+            //     ite++;
+            // }
+
+            std::cout << "Data was read successfully.\n";
+            return pointArray;
         }
-
-        file.close(); 
-
-        //Print the points read from the file and file type, use for TESTING
-        // std::cout << "File Type: " << pathExtension(filePath) << std::endl;
-        // ite = 0;
-        // while(ite < ArraySize){
-        //     std::cout << "Point " << ite << ": " << pointArray[ite].x << ", " << pointArray[ite].z << std::endl;
-        //     ite++;
-        // }
-
-        std::cout << "Data was read successfully.\n";
-        return pointArray;
     }
 
 // Function is meant to write data to a CSV file
@@ -143,9 +143,23 @@ class FileHandler {
     }
 
 // Function to get file extension
-    std::string pathExtension(const std::string& path) {
-        return std::filesystem::path(path).extension().string();
+std::string pathExtension(const std::string& path) { 
+    if (path.size() < 3) { 
+        return std::filesystem::path(path).extension().string();; 
     }
+
+    //std::cout << path << std::endl; // for testing
+
+    string result = path.substr(0, path.size() - 3); 
+
+    result += tolower(path[path.size() - 3]); 
+    result += tolower(path[path.size() - 2]); 
+    result += tolower(path[path.size() - 1]); 
+
+    //std::cout << result << std::endl; // for testing
+
+    return std::filesystem::path(result).extension().string(); 
+}
 
 // Function to read a CSV file and return a vector of doubles
     // std::vector<double> readCSV(std::string path){
@@ -175,7 +189,7 @@ class FileHandler {
 
 };
 
-// //for testing purposes
+//for testing purposes
 // int main() {
 //     FileHandler fh;
 //     fh.fileRead();
