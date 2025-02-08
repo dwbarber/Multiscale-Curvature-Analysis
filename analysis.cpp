@@ -1,6 +1,6 @@
 #include "analysis.h"
 #include "formula.cpp"
-#include "datacontainer.h"
+#include "dataContainer.h"
 #include <iostream>
 #include <unordered_map>
 #include <string>
