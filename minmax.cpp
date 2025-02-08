@@ -46,3 +46,5 @@ int64_t numops(const bool& odd, const int& maxHalfIntervalPossible, const int& m
     //the total number of operations to be performed.
     return retval;
 }
+
+int numscales()
