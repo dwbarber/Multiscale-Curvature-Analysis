@@ -14,9 +14,11 @@ class FileHandler {
 
 // Function is meant to read a CSV file and return an array of points
     point* fileRead() {
-        std::string filePath;
+        std::string input;
         std::cout << "Enter the absolute file path: ";
-        std::getline(std::cin, filePath);
+        std::getline(std::cin, input);
+
+        string filePath = remove_quotes(input); // Remove quotes from the input string
 
         // Check if the file exists
         if (!validPath(filePath)) {
@@ -85,12 +87,12 @@ class FileHandler {
         file.close(); 
 
         //Print the points read from the file and file type, use for TESTING
-        std::cout << "File Type: " << pathExtension(filePath) << std::endl;
-        ite = 0;
-        while(ite < ArraySize){
-            std::cout << "Point " << ite << ": " << pointArray[ite].x << ", " << pointArray[ite].z << std::endl;
-            ite++;
-        }
+        // std::cout << "File Type: " << pathExtension(filePath) << std::endl;
+        // ite = 0;
+        // while(ite < ArraySize){
+        //     std::cout << "Point " << ite << ": " << pointArray[ite].x << ", " << pointArray[ite].z << std::endl;
+        //     ite++;
+        // }
 
         std::cout << "Data was read successfully.\n";
         return pointArray;
@@ -160,11 +162,22 @@ class FileHandler {
     //     }
     // }
 
+// Function to remove quotes from a string
+    string remove_quotes(const string& input) {
+        string result = input;
+      
+        if (result.size() >= 2 && result[0] == '"' && result[result.size() - 1] == '"') {
+            result = result.substr(1, result.size() - 2); 
+        }
+      
+        return result;
+    }      
+
 };
 
 //for testing purposes
-int main() {
-    FileHandler fh;
-    fh.fileRead();
-    return 0;
-}
+// int main() {
+//     FileHandler fh;
+//     fh.fileRead();
+//     return 0;
+// }
