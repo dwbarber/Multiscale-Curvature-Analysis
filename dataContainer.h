@@ -29,6 +29,7 @@ class CurvatureScale {
         double getScale();
         int getLength();
         point getPoint(int index);
+
         
         //----------------------------------------------------------------------------------------------------------------
         // setters
@@ -72,7 +73,7 @@ class DataContainer {
 
         point getPoint(int index);
         int getPointArrayLength();
-        
+        point* getPointAddress(int index);
         // setters
         void setIndex(int index, CurvatureScale* data);
         void putData(int scale, int index, double curvature);

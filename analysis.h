@@ -10,7 +10,7 @@
 class analysis{
     public:
         void singleAnalysis(UserData& uData, DataContainer& data, double (*method)(point,point,point), int numpoints);
-        void hybridAnalysis(UserData& uData, DataContainer& data, double (*method1)(double, double, double, double, double, double), double (*method2)(double, double, double, double, double, double), int numPoints);
+        void hybridAnalysis(UserData& uData, DataContainer& data, double (*method1)(point,point,point), double (*method2)(point,point,point), int numPoints);
 };
 
 #endif

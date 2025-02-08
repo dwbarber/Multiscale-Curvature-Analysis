@@ -64,6 +64,10 @@ point DataContainer::getPoint(int index) {
     return pointArray[index];
 }
 
+point* DataContainer::getPointAddress(int index) {
+    return &pointArray[index];
+}
+
 int DataContainer::getPointArrayLength() {
     return pointArrayLength;
 }

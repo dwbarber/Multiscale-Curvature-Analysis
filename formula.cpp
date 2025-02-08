@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "dataContainer.h"
+#include "formula.h"
 //#include <Eigen/Dense> // https://gitlab.com/libeigen/eigen/-/releases/3.4.0 // to download library
 
 const double PI = 3.14159265358979323846;

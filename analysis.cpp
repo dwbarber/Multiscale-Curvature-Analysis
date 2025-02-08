@@ -29,7 +29,7 @@ void analysis::singleAnalysis(UserData& uData, DataContainer& data, double (*met
     }
 }
 
-void analysis::hybridAnalysis(UserData& uData, DataContainer& data, double (*method1)(double, double, double, double, double, double), double (*method2)(double, double, double, double, double, double), int numPoints){
+void analysis::hybridAnalysis(UserData& uData, DataContainer& data, double (*method1)(point,point,point), double (*method2)(point,point,point), int numPoints){
 
     std::cout << "Hybrid Analysis" << std::endl;
         
@@ -43,10 +43,10 @@ void analysis::hybridAnalysis(UserData& uData, DataContainer& data, double (*met
     for(int scale = minScale; scale <= maxScale; scale++){ //iterate over scales
         for(int point = scale; point < numPoints - scale; point++){ //iterate over points
             // point is the center point 
-            bool acute = isAcute(data.getPoint(point-scale), data.getPoint(point), data.getPoint(point+scale));
+            bool acute = Formula::isAcute(data.getPointAddress(point-scale), data.getPointAddress(point), data.getPointAddress(point+scale));
             
 
-            // Call the function on the points
+            // Call the function on the points(point *point1, point *point2, point *point3);
             if(acute){
                 curvature = method1( data.getPoint(point - scale), data.getPoint(point), data.getPoint(point + scale)); 
 

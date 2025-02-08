@@ -10,10 +10,10 @@ using namespace std;
 class cliInput{
     public:
         //functions to get data from command line
-        string getString(string message);
-        int getInt(string message);
-        double getDouble(string message);
-        bool getYesNo(string message);
+        static string getString(string message);
+        static int getInt(string message);
+        static double getDouble(string message);
+        static bool getYesNo(string message);
 
         //functions to get data from file
 };
