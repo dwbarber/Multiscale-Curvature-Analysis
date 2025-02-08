@@ -163,8 +163,8 @@ class FileHandler {
 };
 
 // for testing purposes
-int main() {
-    FileHandler fh;
-    fh.fileRead();
-    return 0;
-}
+// int main() {
+//     FileHandler fh;
+//     fh.fileRead();
+//     return 0;
+// }
