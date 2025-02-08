@@ -4,7 +4,8 @@
 #include <string>
 
 int fileWrite(DataContainer& XSC){
-    int ite = 0;
+    int ScaleSwitching = 0;
+    int CurvatureSwitching = 0;
     std::string fileName;
 
     std::cout << "Enter file Name: ";
@@ -13,15 +14,19 @@ int fileWrite(DataContainer& XSC){
     std::ofstream myFile(fileName); // Creates or overwrites example.txt
 
     if (myFile.is_open()) {
-         myFile << "X-Position" << "," << "Scale" << "," << "Curvature" << std::endl;
-        while (ite < sizeof(XSC)/sizeof(XSC[0])) {
-            myFile << ite << "," << XSC[ite] << "," << (ite + 1) << std::endl;
-            ite++;
+        int BroadArraySize = XSC.getCurvatureArrayLength(); // Length of the Array holding ALL of the Curvature Data
+        int CurvatureArraySize; // Length of the Array holding the Curvature Data for a Specific Scale
+        myFile << "X-Position" << "," << "Scale" << "," << "Curvature" << std::endl;
+        while (ScaleSwitching < BroadArraySize) {
+            CurvatureArraySize = XSC.getIndex(ScaleSwitching)->getLength();
+            while (CurvatureSwitching < CurvatureArraySize){
+                myFile << XSC.getIndex(ScaleSwitching)->getPoint(CurvatureSwitching).x << "," 
+                       << XSC.getIndex(ScaleSwitching)->getScale() << "," 
+                       << XSC.getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
+                CurvatureSwitching++; // Changing the index for Array of points
+            }
+            ScaleSwitching++; // Changing the index for Array of Curvature Data
         }
-        
-        // std::string name = "John Doe";
-        // int age = 30;
-        // myFile << "Name: " << name << ", Age: " << age << std::endl;
 
         myFile.close();
         std::cout << "Data written to file successfully." << std::endl;
