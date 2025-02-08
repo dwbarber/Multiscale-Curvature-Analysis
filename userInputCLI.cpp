@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <string>
+#include "userInputCLI.h"
+
 using namespace std;
 
 
