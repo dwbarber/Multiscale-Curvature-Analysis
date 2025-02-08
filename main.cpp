@@ -11,4 +11,10 @@ int main() {
   // data.setPointArray(pointArray, 3);
   // CurvatureScale *curv = data.getIndex(0);
   // curv->setScale(0.5);
+
+
+  bool exit = false;
+  while (exit != true){
+    
+  }
 }
