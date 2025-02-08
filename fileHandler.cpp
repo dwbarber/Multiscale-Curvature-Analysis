@@ -81,11 +81,12 @@ class FileHandler {
 
         file.close(); 
 
-        ite = 0;
-        while(ite < ArraySize){
-            std::cout << "Point " << ite << ": " << pointArray[ite].x << ", " << pointArray[ite].z << std::endl;
-            ite++;
-        }
+        // Print the points read from the file, use for TESTING
+        // ite = 0;
+        // while(ite < ArraySize){
+        //     std::cout << "Point " << ite << ": " << pointArray[ite].x << ", " << pointArray[ite].z << std::endl;
+        //     ite++;
+        // }
 
         std::cout << "Data was read successfully.\n";
         return pointArray;
@@ -130,8 +131,9 @@ class FileHandler {
     }
 };
 
-// int main() {
-//     FileHandler fh;
-//     fh.fileRead();
-//     return 0;
-// }
+// for testing purposes
+int main() {
+    FileHandler fh;
+    fh.fileRead();
+    return 0;
+}
