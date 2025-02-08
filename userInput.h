@@ -10,6 +10,6 @@ class UserInput{
 
         
 
-}
+};
 
 #endif

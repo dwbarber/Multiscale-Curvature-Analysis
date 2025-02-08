@@ -47,4 +47,4 @@ int64_t numops(const bool& odd, const int& maxHalfIntervalPossible, const int& m
     return retval;
 }
 
-int numscales()
+
