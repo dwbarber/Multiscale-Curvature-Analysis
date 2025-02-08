@@ -1,14 +1,14 @@
 #ifndef USERINPUT_H
 #define USERINPUT_H
-
-
+#include <string>
+using namespace std;
 class UserInput{
     public:
         //functions to get data from command line
         string getString(string message);
         int getInt(string message);
-        double getDouble(string message){
-        bool getYesNo(string message){
+        double getDouble(string message);
+        bool getYesNo(string message);
 
 
         //setters
@@ -27,8 +27,8 @@ class UserInput{
 
         int analysisType;
         bool hybrid;
-        int hybridSelection[];
+        int hybridSelection[2];
         bool logScale;
-}
+};
 
 #endif
