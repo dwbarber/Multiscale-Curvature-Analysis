@@ -8,6 +8,11 @@ using std::vector;
 class FileHandler{
 
 	int validateType();
+    point* fileRead(); 
+    int fileWrite(DataContainer& XSC);
+    bool validPath(const std::string& path);
+    std::string pathExtension(const std::string& path);
+    string remove_quotes(const string& input);
 
 	void inheritData();
 
