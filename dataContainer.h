@@ -18,11 +18,11 @@ class CurvatureScale {
     public:
 
         // constructors
-        CurvatureScale() {};
+        CurvatureScale();
         CurvatureScale(double *curvatureArray, int dataLength, double scale, point *pointArray);
 
         // destructor
-        ~CurvatureScale();
+        ~CurvatureScale() {};
         
         // getters
         double getCurvature(int index);
@@ -60,7 +60,7 @@ class DataContainer {
     public:
 
         // Constructors 
-        DataContainer();
+        DataContainer() {};
         DataContainer(point* pointArray, int dataLength);
         
         // Destructor deletes the arrays and pointers so memory is not leaked
@@ -80,13 +80,14 @@ class DataContainer {
         void setPointArray(point *pointArray, int dataLength);
         void setPoint(int index, point point);
         
+        
     private:
         // This array stores the height data from input file
         point* pointArray;
         int pointArrayLength;
         
         // This array stores a list of curvature scale objects. Each object stores the curvature array at a scale
-        CurvatureScale** curvatureScaleArray;
+        CurvatureScale* curvatureScaleArray;
         int curvatureArrayLength;
   
 };
