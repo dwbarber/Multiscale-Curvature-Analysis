@@ -40,6 +40,3 @@ using namespace std;
     void UserData::setLogScale(bool logScale){
         UserData::logScale = logScale;
     }
-
-
-    
