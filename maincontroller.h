@@ -18,7 +18,18 @@ protected:
         ANALYZE
     };
 
+
     PROG_STATE currentState = START;
+
+    enum ANALYSIS_STATE
+    {
+        NEWANALYSIS,
+        USERINPUT,
+        ANALYZING,
+        OUTPUT
+    };
+
+    ANALYSIS_STATE currentAnalysisState = NEWANALYSIS;
     std::string commandinput;
 
 

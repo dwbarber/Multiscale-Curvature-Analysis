@@ -39,7 +39,17 @@ void MainController::mainLoop(void){
         //runs analysis
         case ANALYZE:
             std::cout << "Running analysis";
+                switch(currentAnalysisState){
+                    case NEWANALYSIS:
+                        UserData uData;
+                        currentAnalysisState = USERINPUT;
+                        break;
+                    case USERINPUT:
+                        
+                    
+                    
 
+                }
             break;
     }
 }

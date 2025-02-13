@@ -26,7 +26,8 @@ class UserData{
         //scale data
         int userMinScale;
         int userMaxScale;
-        
+    
+
 
         int analysisType;
         bool hybrid;
