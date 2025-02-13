@@ -5,10 +5,10 @@ using namespace std;
 class UserData{
     public:
         //setters
-        void setScaleBounds(int min, int max);
-        void setAnalyisType(string method);
-        void setHybridSelection(string method1, string method2);
-        void setInputFilePath(string path);
+        int setScaleBounds(int min, int max);
+        bool setAnalyisType(string method);
+        bool setHybridSelection(string method1, string method2);
+        bool setInputFilePath(string path);
 
         //getters
         int getMinScale();
@@ -26,7 +26,8 @@ class UserData{
         //scale data
         int userMinScale;
         int userMaxScale;
-        
+    
+
 
         int analysisType;
         bool hybrid;
