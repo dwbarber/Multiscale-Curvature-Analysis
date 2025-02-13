@@ -7,8 +7,9 @@ class UserData{
         //setters
         int setScaleBounds(int min, int max);
         bool setAnalyisType(string method);
-        bool setHybridSelection(string method1, string method2);
+        bool setHybridSelection(string obtusemethod, string acutemethod);
         bool setInputFilePath(string path);
+
 
         //getters
         int getMinScale();

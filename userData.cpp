@@ -5,6 +5,7 @@ int UserData::setScaleBounds(int min, int max) {
     userMinScale = min;
     userMaxScale = max;
 
+
     //returns 0 if valid, 1 if minscale is invalid, 2 if maxscale is invalid, 3 if both are invalid
 }
 
@@ -15,11 +16,11 @@ bool UserData::setAnalyisType(string method) {
     //returns true if analysis is valid
 }
 
-bool UserData::setHybridSelection(string method1, string method2) {
+bool UserData::setHybridSelection(string obtusemethod, string acutemethod) {
     // Assuming hybridSelection is an integer representation of the methods
     // You might need to implement a mapping from string to int
 
-    //returns true if HybridSelection
+    //returns true if HybridSelection is valid
 }
 
 bool UserData::setInputFilePath(string path) {
