@@ -5,7 +5,7 @@ using namespace std;
 class UserData{
     public:
         //setters
-        int setScaleBounds(int min, int max);
+        int setScaleBounds(double min, double max);
         bool setAnalyisType(int method);
         bool setHybridSelection(int obtusemethod, int acutemethod);
         bool setInputFilePath(string path);
@@ -28,7 +28,7 @@ class UserData{
         int userMinScale;
         int userMaxScale;
     
-
+        DataContainer dataContainer;
 
         int analysisType;
         bool hybrid;

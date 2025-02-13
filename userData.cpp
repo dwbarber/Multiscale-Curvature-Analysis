@@ -1,14 +1,34 @@
 #include "userData.h"
+#include "dataContainer.h"
 #include <string>
 using namespace std;
-    
+
     //setters
-    int UserData::setScaleBounds(int min, int max){
+    int UserData::setScaleBounds(double min, double max){
+        //returns 0 if valid, 1 if minscale is invalid, 2 if maxscale is invalid, 3 if both are invalid
+        
+        
         userMinScale = min;
         userMaxScale = max;
+        if(( <= min) && (min <= max)){
+            return 0;
+        }
+        else if()
+
+        int DataContainer::getCurvatureArrayLength() {
+            return curvatureArrayLength;
+        }
+
+        CurvatureScale* DataContainer::getIndex(int index) {
+            return &(curvatureScaleArray[index]);
+        }
+
     }
     bool UserData::setAnalyisType(int method){
+        // Assuming analysisType is an integer representation of the method
+        // You might need to implement a mapping from string to int
         analysisType = method;
+        return true;
     }
     bool UserData::setHybridSelection(int method1, int method2){
         hybridSelection[0] = method1;
@@ -19,20 +39,7 @@ using namespace std;
     }
 #include "userInputCLI.h"
 #include "fileHandler.h"
-int UserData::setScaleBounds(int min, int max) {
-    userMinScale = min;
-    userMaxScale = max;
 
-
-    //returns 0 if valid, 1 if minscale is invalid, 2 if maxscale is invalid, 3 if both are invalid
-}
-
-bool UserData::setAnalyisType(int method) {
-    // Assuming analysisType is an integer representation of the method
-    // You might need to implement a mapping from string to int
-
-    //returns true if analysis is valid
-}
 
 bool UserData::setHybridSelection(int obtusemethod, int acutemethod) {
     // Assuming hybridSelection is an integer representation of the methods

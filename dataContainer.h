@@ -47,6 +47,9 @@ class CurvatureScale {
         */
         void setScale(double scale);
         
+        //----------------------------------------------------------------------------------------------------------------
+        friend class UserData;
+
     private:
         double scale;
         double* curvatureArray;
