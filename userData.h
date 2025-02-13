@@ -6,14 +6,14 @@ class UserData{
     public:
         //setters
         void setScaleBounds(int min, int max);
-        void setAnalyisType(string method);
-        void setHybridSelection(string method1, string method2);
+        void setAnalyisType(int method);
+        void setHybridSelection(int method1, int method2);
         void setInputFilePath(string path);
 
         //getters
         int getMinScale();
         int getMaxScale();
-        string getAnalysisType();
+        int getAnalysisType();
         bool getHybrid();
         int getHybridSelection(int index);
         bool getLogScale();
