@@ -99,7 +99,7 @@ class FileHandler {
     }
 
 // Function is meant to write data to a CSV file
-    int fileWrite(DataContainer& XSC){
+    int fileWrite(DataContainer* XSC){
         std::string fileName;
     
         std::cout << "Enter file Name: ";
@@ -110,16 +110,16 @@ class FileHandler {
         if (myFile.is_open()) {
             int ScaleSwitching = 0;
             int CurvatureSwitching;
-            int BroadArraySize = XSC.getCurvatureArrayLength(); // Length of the Array holding ALL of the Curvature Data
+            int BroadArraySize = XSC->getCurvatureArrayLength(); // Length of the Array holding ALL of the Curvature Data
             int CurvatureArraySize; // Length of the Array holding the Curvature Data for a Specific Scale
             myFile << "X-Position" << "," << "Scale" << "," << "Curvature" << std::endl;
             while (ScaleSwitching < BroadArraySize) {
-                CurvatureArraySize = XSC.getIndex(ScaleSwitching)->getLength();
+                CurvatureArraySize = XSC->getIndex(ScaleSwitching)->getLength();
                 CurvatureSwitching = 0; // Resetting the index for Array of points
                 while (CurvatureSwitching < CurvatureArraySize){
-                    myFile << XSC.getIndex(ScaleSwitching)->getPoint(CurvatureSwitching).x << "," 
-                           << XSC.getIndex(ScaleSwitching)->getScale() << "," 
-                           << XSC.getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
+                    myFile << XSC->getIndex(ScaleSwitching)->getPoint(CurvatureSwitching).x << "," 
+                           << XSC->getIndex(ScaleSwitching)->getScale() << "," 
+                           << XSC->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
                     CurvatureSwitching++; // Changing the index for Array of points
                 }
                 ScaleSwitching++; // Changing the index for Array of Curvature Data
