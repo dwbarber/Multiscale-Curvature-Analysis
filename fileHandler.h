@@ -1,4 +1,4 @@
-#ifdef FILEHANDLER_H
+#ifndef FILEHANDLER_H
 #define FILEHANDLER_H
 
 #include<string>
