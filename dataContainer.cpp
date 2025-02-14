@@ -1,6 +1,8 @@
 #include "dataContainer.h"
 #include <cstring>
 
+// CurvatureScale functions ---------------------------------------------------------------------------------------------------
+
 CurvatureScale::CurvatureScale(double *curvatureArray, int dataLength, double scale, point *pointArray) {
     CurvatureScale::curvatureArray = new double[dataLength];
     memcpy(CurvatureScale::curvatureArray, curvatureArray, dataLength * sizeof(double));
@@ -66,6 +68,8 @@ CurvatureScale* DataContainer::getIndex(int index) {
 
 // }
 
+// DataContainer functions ---------------------------------------------------------------------------------------------------
+
 point DataContainer::getPoint(int index) {
     return pointArray[index];
 }
@@ -92,7 +96,7 @@ double DataContainer::getMaxLength() {
 
 double DataContainer::getmaxHalfIntervalPossible() {
     return maxHalfIntervalPossible;
-}
+} 
 
 // setters
 void DataContainer::setIndex(int index, CurvatureScale* data) {
