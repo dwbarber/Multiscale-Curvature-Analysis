@@ -82,6 +82,18 @@ int DataContainer::getCurvatureArrayLength() {
     return curvatureArrayLength;
 }
 
+double DataContainer::getMinLength() {
+    return minLength;
+}
+
+double DataContainer::getMaxLength() {
+    return (minLength * maxHalfIntervalPossible);
+}
+
+double DataContainer::getmaxHalfIntervalPossible() {
+    return maxHalfIntervalPossible;
+}
+
 // setters
 void DataContainer::setIndex(int index, CurvatureScale* data) {
     curvatureScaleArray[index] = *data;

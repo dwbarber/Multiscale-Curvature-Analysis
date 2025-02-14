@@ -1,55 +1,74 @@
 #include "userData.h"
-#include <string>
-using namespace std;
-    
-    //setters
-    int UserData::setScaleBounds(int min, int max){
-        userMinScale = min;
-        userMaxScale = max;
-    }
-    bool UserData::setAnalyisType(int method){
-        analysisType = method;
-    }
-    bool UserData::setHybridSelection(int method1, int method2){
-        hybridSelection[0] = method1;
-        hybridSelection[1] = method2;
-    }
-    bool UserData::setInputFilePath(string path){
-        inputFilepath = path;
-    }
+#include "dataContainer.h"
 #include "userInputCLI.h"
 #include "fileHandler.h"
-int UserData::setScaleBounds(int min, int max) {
-    userMinScale = min;
-    userMaxScale = max;
+#include <string>
+using namespace std;
 
+    //setters
 
-    //returns 0 if valid, 1 if minscale is invalid, 2 if maxscale is invalid, 3 if both are invalid
-}
+    bool UserData::setDataContainer(DataContainer dataContainer){
+        // Assuming dataContainer is a DataContainer object
+        // You might need to implement a mapping from string to DataContainer
+        UserData::dataContainer = dataContainer;
+        return true;
+    }
+    int UserData::setScaleBounds(double min, double max){
+        //returns 0 if valid, 1 if minscale is invalid, 2 if maxscale is invalid, 3 if both are invalid
 
-bool UserData::setAnalyisType(int method) {
-    // Assuming analysisType is an integer representation of the method
-    // You might need to implement a mapping from string to int
+        int minint = floor(min / getDataContainer().getMinLength());
+        int maxint = ceil(max / getDataContainer().getMinLength());
+        bool minValid = true;
+        bool maxValid = true;
 
-    //returns true if analysis is valid
-}
+        if(minint < 1){
+            minValid = false;
+        }
+        if(maxint > getDataContainer().getmaxHalfIntervalPossible()){
+            maxValid = false;
+        }
 
-bool UserData::setHybridSelection(int obtusemethod, int acutemethod) {
-    // Assuming hybridSelection is an integer representation of the methods
-    // You might need to implement a mapping from string to int
-
-    //returns true if HybridSelection is valid
-}
-
-bool UserData::setInputFilePath(string path) {
-    inputFilepath = path;
-
-    //returns true if file is valid
-
-
-}
+        if(minValid && maxValid){
+            userMinScale = minint;
+            userMaxScale = maxint;
+            return 0;
+        }
+        else if(!minValid && !maxValid){
+            //cerr << "Both min and max scale are invalid" << endl;
+            return 3;
+        }
+        else if(!minValid){
+            //cerr << "Min scale is invalid" << endl;
+            return 1;
+        }
+        else{
+            //cerr << "Max scale is invalid" << endl;
+            return 2;
+        }
+    }
+    bool UserData::setAnalyisType(int method){
+        // Assuming analysisType is an integer representation of the method
+        // You might need to implement a mapping from string to int
+        analysisType = method;
+        return true;
+    }
+    bool UserData::setHybridSelection(int method1, int method2){
+        // Assuming hybridSelection is an integer representation of the methods
+        // You might need to implement a mapping from string to int
+        hybridSelection[0] = method1;
+        hybridSelection[1] = method2;
+        return true;
+    }
+    bool UserData::setInputFilePath(string path){
+        //returns true if file is valid
+        inputFilepath = path;
+        return true;
+    }
 
     //getters
+    DataContainer UserData::getDataContainer(){
+        return dataContainer;
+    }
     int UserData::getMinScale(){
         return userMinScale;
     }
