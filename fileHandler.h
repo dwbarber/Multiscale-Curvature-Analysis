@@ -6,7 +6,7 @@
 #include<vector>
 using std::vector;
 class FileHandler{
-    
+    public:
 	static int validateType();
     static point* fileRead(); 
     static int fileWrite(DataContainer& XSC);

@@ -71,6 +71,8 @@ class DataContainer {
         CurvatureScale* getScale(double scale);
         int getCurvatureArrayLength();
 
+
+
         point getPoint(int index);
         int getPointArrayLength();
         point* getPointAddress(int index);
@@ -81,6 +83,7 @@ class DataContainer {
         void setIndex(int index, CurvatureScale* data);
         void putData(int scale, int index, double curvature);
         void setPointArray(point *pointArray, int dataLength);
+        void initDataZero(point *pointArray);
         void setPoint(int index, point point);
         
         friend class UserData;

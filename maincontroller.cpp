@@ -4,7 +4,9 @@
 #include<iostream>
 #include"userInputCLI.h"
 #include<string>
+#include"dataContainer.h"
 #include "userData.h"
+#include "fileHandler.h"
 
 
 using namespace std;
@@ -39,16 +41,23 @@ void MainController::mainLoop(void){
         //runs analysis
         case ANALYZE:
             std::cout << "Running analysis";
+                UserData uData;
+                DataContainer data;
                 switch(currentAnalysisState){
                     case NEWANALYSIS:
-                        UserData uData;
                         currentAnalysisState = USERINPUT;
                         break;
                     case USERINPUT:
+                        //get user input for the first time
+                        //get file path
+                        uData.setInputFilePath(cliInput::getString("Please enter the file path"));
+                        data.initDataZero(FileHandler::fileRead(uData.getInputFilePath()));
                         
-                    
-                    
-
+                        
+                        //get min and max scale
+                        break;
+                    default:
+                        break;
                 }
             break;
     }
