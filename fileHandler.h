@@ -8,7 +8,7 @@ using std::vector;
 class FileHandler{
     public:
     	static int validateType();
-        static point* fileRead(); 
+        static point* fileRead(string input); 
         static int fileWrite(DataContainer& XSC);
         static bool validPath(const std::string& path);
         static std::string pathExtension(const std::string& path);

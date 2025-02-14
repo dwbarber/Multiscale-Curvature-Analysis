@@ -51,8 +51,13 @@ void MainController::mainLoop(void){
                         //get user input for the first time
                         //get file path
                         uData.setInputFilePath(cliInput::getString("Please enter the file path"));
-                        data.initDataZero(FileHandler::fileRead(uData.getInputFilePath()));
-                        
+                        point* pointArray = FileHandler::fileRead(uData.getInputFilePath());
+                        if(pointArray == nullptr){
+                            std::cout << "Invalid file path";
+                        }
+                        else{
+                            data.initDataZero(pointArray);
+                        }
                         
                         //get min and max scale
                         break;
