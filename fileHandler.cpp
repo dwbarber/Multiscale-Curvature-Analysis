@@ -5,6 +5,7 @@
 #include <sstream>
 #include <filesystem>
 #include <vector>
+#include "fileHandler.h"
 
 using namespace std;
 
