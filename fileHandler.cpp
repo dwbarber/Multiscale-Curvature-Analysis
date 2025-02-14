@@ -13,39 +13,27 @@ class FileHandler {
     public:
 
 // Function is meant to read a CSV file and return an array of points
-    static point* fileRead() {
-        std::string input;
-        std::cout << "Enter the absolute file path: ";
-        std::getline(std::cin, input);
-
+    static point* fileRead(string input) {
         string filePath = remove_quotes(input); // Remove quotes from the input string
 
         // Check if the file exists
         if (!validPath(filePath)) {
             std::cerr << "Error: File does not exist!" << std::endl;
-            point* error = new point[1];
-            error[0].x = -1;
-            error[0].z = -1;
-            return error;
+            return nullptr;
         }
 
         // Check if the file extension is ".csv"
+        // PathExtension function is used to make the file type case insensitive
         if (pathExtension(filePath) != ".csv" && pathExtension(filePath) != ".txt" && pathExtension(filePath) != ".x3p") {
             std::cerr << "Error: Invalid file type! Expected a .csv file." << std::endl;
             std::cerr << pathExtension(filePath) << std::endl;
-            point* error = new point[1];
-            error[0].x = -1;
-            error[0].z = -1;
-            return error;
+            return nullptr;
         }
 
         std::ifstream file(filePath); // Open file
         if (!file.is_open()) {
             std::cerr << "Error opening file!" << std::endl;
-            point* error = new point[1];
-            error[0].x = -1;
-            error[0].z = -1;
-            return error;
+            return nullptr;
         }
         else{
             // First loop: Count the number of lines

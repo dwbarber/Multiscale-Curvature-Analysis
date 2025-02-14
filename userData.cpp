@@ -60,14 +60,15 @@ using namespace std;
         return true;
     }
     bool UserData::setInputFilePath(string path){
-        //returns true if file is valid
-
-        
+        //returns true if file is valid        
         inputFilepath = path;
         return true;
     }
 
     //getters
+    string UserData::getInputFilePath(){
+        return inputFilepath;
+    }
     DataContainer UserData::getDataContainer(){
         return dataContainer;
     }

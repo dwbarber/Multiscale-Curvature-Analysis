@@ -22,6 +22,7 @@ class UserData{
         int getHybridSelection(int index);
         bool getLogScale();
         void setLogScale(bool logScale);
+        string getInputFilePath();
         
     private:
         //filepath
