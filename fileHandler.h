@@ -7,16 +7,16 @@
 using std::vector;
 class FileHandler{
     public:
-	static int validateType();
-    static point* fileRead(); 
-    static int fileWrite(DataContainer& XSC);
-    static bool validPath(const std::string& path);
-    static std::string pathExtension(const std::string& path);
-    static string remove_quotes(const string& input);
+    	static int validateType();
+        static point* fileRead(); 
+        static int fileWrite(DataContainer& XSC);
+        static bool validPath(const std::string& path);
+        static std::string pathExtension(const std::string& path);
+        static string remove_quotes(const string& input);
 
-	static void inheritData();
+    	static void inheritData();
 
-    static point* read(std::string fileName);
+        static point* read(std::string fileName);
 
 };
 
