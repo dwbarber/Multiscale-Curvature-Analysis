@@ -13,7 +13,7 @@ class FileHandler {
     public:
 
 // Function is meant to read a CSV file and return an array of points
-    point* fileRead() {
+    static point* fileRead() {
         std::string input;
         std::cout << "Enter the absolute file path: ";
         std::getline(std::cin, input);
@@ -100,7 +100,7 @@ class FileHandler {
     }
 
 // Function is meant to write data to a CSV file
-    int fileWrite(DataContainer* XSC){
+    static int fileWrite(DataContainer* XSC){
         std::string fileName;
     
         std::cout << "Enter file Name: ";
@@ -139,28 +139,28 @@ class FileHandler {
 
 //File checking:
 // Function to check if a file exists
-    bool validPath(const std::string& path) {
+    static bool validPath(const std::string& path) {
         return std::filesystem::exists(path);
     }
 
 // Function to get file extension
-std::string pathExtension(const std::string& path) { 
-    if (path.size() < 3) { 
-        return std::filesystem::path(path).extension().string();; 
+    static std::string pathExtension(const std::string& path) { 
+        if (path.size() < 3) { 
+            return std::filesystem::path(path).extension().string();; 
+        }
+
+        //std::cout << path << std::endl; // for testing
+
+        string result = path.substr(0, path.size() - 3); 
+
+        result += tolower(path[path.size() - 3]); 
+        result += tolower(path[path.size() - 2]); 
+        result += tolower(path[path.size() - 1]); 
+
+        //std::cout << result << std::endl; // for testing
+
+        return std::filesystem::path(result).extension().string(); 
     }
-
-    //std::cout << path << std::endl; // for testing
-
-    string result = path.substr(0, path.size() - 3); 
-
-    result += tolower(path[path.size() - 3]); 
-    result += tolower(path[path.size() - 2]); 
-    result += tolower(path[path.size() - 1]); 
-
-    //std::cout << result << std::endl; // for testing
-
-    return std::filesystem::path(result).extension().string(); 
-}
 
 // Function to read a CSV file and return a vector of doubles
     // std::vector<double> readCSV(std::string path){
@@ -178,7 +178,7 @@ std::string pathExtension(const std::string& path) {
     // }
 
 // Function to remove quotes from a string
-    string remove_quotes(const string& input) {
+    static string remove_quotes(const string& input) {
         string result = input;
       
         if (result.size() >= 2 && result[0] == '"' && result[result.size() - 1] == '"') {
