@@ -48,6 +48,8 @@ void CurvatureScale::setScale(double scale) {
     CurvatureScale::scale = scale;
 }
 
+// DataContainer functions ---------------------------------------------------------------------------------------------------
+
 DataContainer::DataContainer(point* pointArray, int dataLength) {
     DataContainer::pointArray= new point[dataLength];
     memcpy(DataContainer::pointArray, pointArray, dataLength * sizeof(point));
@@ -67,8 +69,6 @@ CurvatureScale* DataContainer::getIndex(int index) {
 // CurvatureScale* DataContainer::getScale(double scale){
 
 // }
-
-// DataContainer functions ---------------------------------------------------------------------------------------------------
 
 point DataContainer::getPoint(int index) {
     return pointArray[index];
