@@ -86,10 +86,12 @@ int DataContainer::getCurvatureArrayLength() {
 void DataContainer::setIndex(int index, CurvatureScale* data) {
     curvatureScaleArray[index] = *data;
 }
-
-// void DataContainer::putData(int index, CurvatureScale* data) {
-    
-// }
+void DataContainer::setPoint(int index, point point) {
+    pointArray[index] = point;
+}
+void DataContainer::putData(int scale, int index, double curvature) {
+    this->curvatureScaleArray[scale].setCurvature(curvature, index);
+}
 
 void DataContainer::setPointArray(point *pointArray, int dataLength) {
     delete[] DataContainer::pointArray;
@@ -99,6 +101,4 @@ void DataContainer::setPointArray(point *pointArray, int dataLength) {
     curvatureScaleArray = new CurvatureScale[(dataLength*(dataLength+1))/2];
 }
 
-void DataContainer::setPoint(int index, point point) {
-    pointArray[index] = point;
-}
+
