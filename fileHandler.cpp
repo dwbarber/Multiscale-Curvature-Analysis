@@ -5,6 +5,7 @@
 #include <sstream>
 #include <filesystem>
 #include <vector>
+#include "fileHandler.h"
 
 using namespace std;
 
@@ -12,39 +13,27 @@ class FileHandler {
     public:
 
 // Function is meant to read a CSV file and return an array of points
-    point* fileRead() {
-        std::string input;
-        std::cout << "Enter the absolute file path: ";
-        std::getline(std::cin, input);
-
+    static point* fileRead(string input) {
         string filePath = remove_quotes(input); // Remove quotes from the input string
 
         // Check if the file exists
         if (!validPath(filePath)) {
             std::cerr << "Error: File does not exist!" << std::endl;
-            point* error = new point[1];
-            error[0].x = -1;
-            error[0].z = -1;
-            return error;
+            return nullptr;
         }
 
         // Check if the file extension is ".csv"
+        // PathExtension function is used to make the file type case insensitive
         if (pathExtension(filePath) != ".csv" && pathExtension(filePath) != ".txt" && pathExtension(filePath) != ".x3p") {
             std::cerr << "Error: Invalid file type! Expected a .csv file." << std::endl;
             std::cerr << pathExtension(filePath) << std::endl;
-            point* error = new point[1];
-            error[0].x = -1;
-            error[0].z = -1;
-            return error;
+            return nullptr;
         }
 
         std::ifstream file(filePath); // Open file
         if (!file.is_open()) {
             std::cerr << "Error opening file!" << std::endl;
-            point* error = new point[1];
-            error[0].x = -1;
-            error[0].z = -1;
-            return error;
+            return nullptr;
         }
         else{
             // First loop: Count the number of lines
@@ -99,7 +88,7 @@ class FileHandler {
     }
 
 // Function is meant to write data to a CSV file
-    int fileWrite(DataContainer* XSC){
+    static int fileWrite(DataContainer* XSC){
         std::string fileName;
     
         std::cout << "Enter file Name: ";
@@ -138,28 +127,28 @@ class FileHandler {
 
 //File checking:
 // Function to check if a file exists
-    bool validPath(const std::string& path) {
+    static bool validPath(const std::string& path) {
         return std::filesystem::exists(path);
     }
 
 // Function to get file extension
-std::string pathExtension(const std::string& path) { 
-    if (path.size() < 3) { 
-        return std::filesystem::path(path).extension().string();; 
+    static std::string pathExtension(const std::string& path) { 
+        if (path.size() < 3) { 
+            return std::filesystem::path(path).extension().string();; 
+        }
+
+        //std::cout << path << std::endl; // for testing
+
+        string result = path.substr(0, path.size() - 3); 
+
+        result += tolower(path[path.size() - 3]); 
+        result += tolower(path[path.size() - 2]); 
+        result += tolower(path[path.size() - 1]); 
+
+        //std::cout << result << std::endl; // for testing
+
+        return std::filesystem::path(result).extension().string(); 
     }
-
-    //std::cout << path << std::endl; // for testing
-
-    string result = path.substr(0, path.size() - 3); 
-
-    result += tolower(path[path.size() - 3]); 
-    result += tolower(path[path.size() - 2]); 
-    result += tolower(path[path.size() - 1]); 
-
-    //std::cout << result << std::endl; // for testing
-
-    return std::filesystem::path(result).extension().string(); 
-}
 
 // Function to read a CSV file and return a vector of doubles
     // std::vector<double> readCSV(std::string path){
@@ -177,7 +166,7 @@ std::string pathExtension(const std::string& path) {
     // }
 
 // Function to remove quotes from a string
-    string remove_quotes(const string& input) {
+    static string remove_quotes(const string& input) {
         string result = input;
       
         if (result.size() >= 2 && result[0] == '"' && result[result.size() - 1] == '"') {

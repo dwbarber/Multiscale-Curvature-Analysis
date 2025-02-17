@@ -1,6 +1,8 @@
 #include "dataContainer.h"
 #include <cstring>
 
+// CurvatureScale functions ---------------------------------------------------------------------------------------------------
+
 CurvatureScale::CurvatureScale(double *curvatureArray, int dataLength, double scale, point *pointArray) {
     CurvatureScale::curvatureArray = new double[dataLength];
     memcpy(CurvatureScale::curvatureArray, curvatureArray, dataLength * sizeof(double));
@@ -46,6 +48,8 @@ void CurvatureScale::setScale(double scale) {
     CurvatureScale::scale = scale;
 }
 
+// DataContainer functions ---------------------------------------------------------------------------------------------------
+
 DataContainer::DataContainer(point* pointArray, int dataLength) {
     DataContainer::pointArray= new point[dataLength];
     memcpy(DataContainer::pointArray, pointArray, dataLength * sizeof(point));
@@ -82,6 +86,18 @@ int DataContainer::getCurvatureArrayLength() {
     return curvatureArrayLength;
 }
 
+double DataContainer::getMinLength() {
+    return minLength;
+}
+
+double DataContainer::getMaxLength() {
+    return (minLength * maxHalfIntervalPossible);
+}
+
+double DataContainer::getmaxHalfIntervalPossible() {
+    return maxHalfIntervalPossible;
+} 
+
 // setters
 void DataContainer::setIndex(int index, CurvatureScale* data) {
     curvatureScaleArray[index] = *data;
@@ -95,6 +111,15 @@ void DataContainer::putData(int scale, int index, double curvature) {
 
 void DataContainer::setPointArray(point *pointArray, int dataLength) {
     delete[] DataContainer::pointArray;
+    DataContainer::pointArray= new point[dataLength];
+    memcpy(DataContainer::pointArray, pointArray, dataLength * sizeof(point));
+    delete[] curvatureScaleArray;
+    curvatureScaleArray = new CurvatureScale[(dataLength*(dataLength+1))/2];
+}
+// intializes the original data to zero, automatially calculates data length
+void DataContainer::initDataZero(point *pointArray) {
+    delete[] DataContainer::pointArray;
+    int dataLength = sizeof(pointArray)/sizeof(pointArray[0]);
     DataContainer::pointArray= new point[dataLength];
     memcpy(DataContainer::pointArray, pointArray, dataLength * sizeof(point));
     delete[] curvatureScaleArray;

@@ -46,9 +46,6 @@ class CurvatureScale {
         * @param scale: The scale at which this data was calculated
         */
         void setScale(double scale);
-        
-        //----------------------------------------------------------------------------------------------------------------
-        friend class UserData;
 
     private:
         double scale;
@@ -74,15 +71,22 @@ class DataContainer {
         CurvatureScale* getScale(double scale);
         int getCurvatureArrayLength();
 
+
+
         point getPoint(int index);
         int getPointArrayLength();
         point* getPointAddress(int index);
+        double getMinLength();
+        double getMaxLength();
+        double getmaxHalfIntervalPossible();
         // setters
         void setIndex(int index, CurvatureScale* data);
         void putData(int scale, int index, double curvature);
         void setPointArray(point *pointArray, int dataLength);
+        void initDataZero(point *pointArray);
         void setPoint(int index, point point);
         
+        friend class UserData;
         
     private:
         // This array stores the height data from input file
@@ -92,6 +96,10 @@ class DataContainer {
         // This array stores a list of curvature scale objects. Each object stores the curvature array at a scale
         CurvatureScale* curvatureScaleArray;
         int curvatureArrayLength;
+
+        //Properties of data
+        double minLength;
+        int maxHalfIntervalPossible;
   
 };
 

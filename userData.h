@@ -1,10 +1,12 @@
 #ifndef USERDATA_H
 #define USERDATA_H
+#include <cmath>
 #include <string>
 using namespace std;
 class UserData{
     public:
         //setters
+        bool setDataContainer(DataContainer dataContainer);
         int setScaleBounds(double min, double max);
         bool setAnalyisType(int method);
         bool setHybridSelection(int obtusemethod, int acutemethod);
@@ -12,6 +14,7 @@ class UserData{
 
 
         //getters
+        DataContainer getDataContainer();
         int getMinScale();
         int getMaxScale();
         int getAnalysisType();
@@ -19,6 +22,7 @@ class UserData{
         int getHybridSelection(int index);
         bool getLogScale();
         void setLogScale(bool logScale);
+        string getInputFilePath();
         
     private:
         //filepath
