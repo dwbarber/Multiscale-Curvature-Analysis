@@ -2,6 +2,7 @@
 #define USERDATA_H
 #include <cmath>
 #include <string>
+#include "dataContainer.h"
 using namespace std;
 class UserData{
     public:
@@ -11,6 +12,7 @@ class UserData{
         bool setAnalyisType(int method);
         bool setHybridSelection(int obtusemethod, int acutemethod);
         bool setInputFilePath(string path);
+        int setIsHybrid(bool isItHybrid);
 
 
         //getters

@@ -52,6 +52,10 @@ using namespace std;
         analysisType = method;
         return true;
     }
+    int UserData::setIsHybrid(bool isItHybrid){
+        hybrid= isItHybrid;
+        return 0;
+    }
     bool UserData::setHybridSelection(int method1, int method2){
         // Assuming hybridSelection is an integer representation of the methods
         // You might need to implement a mapping from string to int

@@ -57,8 +57,37 @@ void MainController::mainLoop(void){
                         }
                         else{
                             data.initDataZero(pointArray);
+                            std::cout << " Enter minimum scale" << std::endl;
+                            double minScale;
+                            double maxScale;
+                            std::cin>>minScale;
+                            std::cout << " Enter maximum scale" << std::endl;
+                            std::cin >> maxScale;
+
+                            if(uData.setScaleBounds(minScale, maxScale)!= 0){
+                                //AAAAAH USER SCALE IS WRONG
+                                }
+                            else{
+                            std::cout << "would you like your analysis to be hybrid enter Yes/No?" << endl;
+                            std::string yesOrNo;
+                            std::cin >> yesOrNo;
+                            bool isHybrid;
+                            if(yesOrNo.find("Yes")!=std::string::npos){
+                                isHybrid=true;
+                            }
+                            else{
+                                if(yesOrNo.find("No")!=std::string::npos){
+                                    isHybrid=false;
+                                }
+                                else{
+                                    //fixme case of: AAAH invalid string
+                                }
+                            }
+                            uData.setIsHybrid(isHybrid);
+                            //next variables for uData
+                            }
                         }
-                        
+
                         //get min and max scale
                         break;
                     default:
