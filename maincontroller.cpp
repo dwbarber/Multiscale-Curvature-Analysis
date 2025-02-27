@@ -1,10 +1,10 @@
 #include "maincontroller.h"
-#include<stdio.h> 
-#include<stdlib.h>
-#include<iostream>
-#include"userInputCLI.h"
-#include<string>
-#include"dataContainer.h"
+#include <stdio.h> 
+#include <stdlib.h>
+#include <iostream>
+#include "userInputCLI.h"
+#include <string>
+#include "dataContainer.h"
 #include "userData.h"
 #include "fileHandler.h"
 
