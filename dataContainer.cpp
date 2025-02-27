@@ -156,3 +156,18 @@ void DataContainer::setmaxhalfinterval(){
     DataContainer::maxLength = DataContainer::minLength * DataContainer::maxHalfIntervalPossible;
 }
 
+// this function takes in the maximum measurement parameters from the function defined above, as well as the user's preferred measurement parameters in order
+// to determine how many curvatures will be calculated (Number of Operations: numops)
+void DataContainer::numOps(const int& minScale, const int& maxScale){
+    int64_t retval;
+    //formula is different for calculating the number of operations if the data is odd or even.
+    int minops = (DataContainer::maxHalfIntervalPossible) - minScale + 1;
+    int maxops = (DataContainer::maxHalfIntervalPossible) - maxScale;
+    retval = minops * minops - maxops * maxops;
+    if (DataContainer::odd){
+        //the only part that is different depending on if the data is odd or even.
+        retval += minops - maxops;
+    }
+    //the total number of operations to be performed = indexes in the array.
+    DataContainer::curvatureArrayLength = retval;
+}

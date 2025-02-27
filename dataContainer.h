@@ -2,6 +2,7 @@
 #define DATACONTAINER_H
 #include <cstring>
 #include <cmath>
+#include <cstdint>
 /**
 * 
 */
@@ -10,7 +11,6 @@
 typedef struct{
     double x;
     double z;
-        
 }point;
 
 // This struct stores an array of curvatures and the scale at whitch they were calculated
@@ -23,7 +23,7 @@ class CurvatureScale {
         CurvatureScale(double *curvatureArray, int dataLength, double scale, point *pointArray);
 
         // destructor
-        ~CurvatureScale() {};
+        ~CurvatureScale(){};
         
         // getters
         double getCurvature(int index);
@@ -89,7 +89,7 @@ class DataContainer {
         void initDataZero(point *pointArray);
         void setPoint(int index, point point);
         void setmaxhalfinterval();
-        
+        void numOps(const int& minScale, const int& maxScale);        
         
         friend class UserData;
         
@@ -107,7 +107,6 @@ class DataContainer {
         double maxLength;
         int maxHalfIntervalPossible;
         bool odd;
-  
 };
 
 #endif
