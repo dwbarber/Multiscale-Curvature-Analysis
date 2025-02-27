@@ -1,10 +1,13 @@
 #include <cstdint>
+#include "datacontainer.h"
+#include <cmath> // For std::abs with floating-point types
+#include <cstdlib> // For std::abs with integer types
 
-int maxHalfIntervalPossible(double& minLength, double& maxLength, int& arraylength, bool& odd, const double arr[]){
+int maxHalfIntervalPossible(double& minLength, double& maxLength, int& arraylength, bool& odd, const point arr[]){
     //we find the length of the input array
     int arraylength = sizeof(arr)/sizeof(arr[0]);
     //we find the minimum length by averaging the length across the entire data, that is, the smallest distance between two points
-    double minLength = (arr[0] + arr[arraylength]) / (arraylength - 1);
+    double minLength = abs((arr[arraylength].x)-(arr[0].x) / (arraylength - 1));
     int maxHalfIntervalPossible;
     double maxLength;
     //we calculate the maximum length possible. First, we check to see if the data has an even or odd number of points
@@ -32,7 +35,8 @@ int maxHalfIntervalPossible(double& minLength, double& maxLength, int& arrayleng
     return maxHalfIntervalPossible;
 }
 
-
+// this function takes in the maximum measurement parameters from the function defined above, as well as the user's preferred measurement parameters in order
+// to determine how many curvatures will be calculated
 int64_t numops(const bool& odd, const int& maxHalfIntervalPossible, const int& minScale, const int& maxScale){
     int64_t retval;
     //formula is different for calculating the number of operations if the data is odd or even.

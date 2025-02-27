@@ -99,7 +99,9 @@ class DataContainer {
 
         //Properties of data
         double minLength;
+        double maxLength;
         int maxHalfIntervalPossible;
+        bool odd;
   
 };
 
