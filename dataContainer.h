@@ -1,6 +1,7 @@
 #ifndef DATACONTAINER_H
 #define DATACONTAINER_H
-
+#include <cstring>
+#include <cmath>
 /**
 * 
 */
@@ -78,6 +79,7 @@ class DataContainer {
         point* getPointAddress(int index);
         double getMinLength();
         double getMaxLength();
+       
         double getmaxHalfIntervalPossible();
         // setters
         void setIndex(int index, CurvatureScale* data);
@@ -85,6 +87,8 @@ class DataContainer {
         void setPointArray(point *pointArray, int dataLength);
         void initDataZero(point *pointArray);
         void setPoint(int index, point point);
+        void setmaxhalfinterval();
+        
         
         friend class UserData;
         

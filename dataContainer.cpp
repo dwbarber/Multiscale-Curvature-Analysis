@@ -1,5 +1,4 @@
 #include "dataContainer.h"
-#include <cstring>
 
 // CurvatureScale functions ---------------------------------------------------------------------------------------------------
 
@@ -126,4 +125,30 @@ void DataContainer::initDataZero(point *pointArray) {
     curvatureScaleArray = new CurvatureScale[(dataLength*(dataLength+1))/2];
 }
 
+void DataContainer::setmaxhalfinterval(){
+    //we find the minimum length by averaging the length across the entire data, thatis, the smallest distance between two points
+    DataContainer::minLength = abs((DataContainer::pointArray[pointArrayLength].x)-(DataContainer::pointArray[0].x) / (DataContainer::pointArrayLength - 1));
+    //we calculate the maximum length possible. First, we check to see if the data has an even or odd number of points
+    //an even number of points results in an odd number of intervals. the number of intervals is always one less than the number of points
+    //an odd number of points results in an even number of intervals.
+    //we want to find the maximum interval possible that fits in twice within the data.
+    //the following formulas calculate the maximum interval possible given the data.
+    if(DataContainer::pointArrayLength % 2 == 0){
+        //data is even length
+        //odd number of intervals
+        //example: 4 points. this means there are 3 intervals, and the maximum half interval possible is 1.
+        DataContainer::maxHalfIntervalPossible = (DataContainer::pointArrayLength / 2) - 1;
+        DataContainer::odd = false;
+    }
+    else{
+        //data is odd length
+        //even number of intervals
+        //example: 5 points. this means there are 4 intervals, and the maximum half interval possible is 2.
+        DataContainer::maxHalfIntervalPossible = (DataContainer::pointArrayLength - 1) / 2;
+        DataContainer::odd = true;
+    }
+    //finally, for the user, we multiply the minimum length by the maximum half interval possible to get the maximum length possible.
+    //this value is shown later to the user as they select their bounds, as it represents the upper limit of what is possible to enter into the bounds.
+    DataContainer::maxLength = DataContainer::minLength * DataContainer::maxHalfIntervalPossible;
+}
 
