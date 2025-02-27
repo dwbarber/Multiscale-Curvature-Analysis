@@ -162,5 +162,6 @@ void DataContainer::numOps(const int& minScale, const int& maxScale){
         retval += minops - maxops;
     }
     //the total number of operations to be performed = indexes in the array.
+    DataContainer::curvatureScaleArray = new CurvatureScale[retval];
     DataContainer::curvatureArrayLength = retval;
 }
