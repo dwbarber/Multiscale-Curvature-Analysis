@@ -115,6 +115,10 @@ void DataContainer::setPointArray(point *pointArray, int dataLength) {
     delete[] curvatureScaleArray;
     curvatureScaleArray = new CurvatureScale[(dataLength*(dataLength+1))/2];
 }
+void DataContainer::setPointArray(int dataLength) {
+    delete[] DataContainer::pointArray;
+    DataContainer::pointArray= new point[dataLength];
+}
 // intializes the original data to zero, automatially calculates data length
 void DataContainer::initDataZero(point *pointArray) {
     delete[] DataContainer::pointArray;
