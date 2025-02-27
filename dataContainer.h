@@ -37,6 +37,7 @@ class CurvatureScale {
         
         // sets the curvature array from an external array
         void setCurvatureArray(double* curvatureArray, int dataLength);
+        void setCurvatureArray(int dataLength);
         
         // sets curvature at index
         void setCurvature(double curvature, int index);
@@ -86,6 +87,7 @@ class DataContainer {
         void putData(int scale, int index, double curvature);
         void setPointArray(point *pointArray, int dataLength);
         void setPointArray(int dataLength);
+        void setCurvatureScaleArray(int dataLength);
         void setPoint(int index, point point);
         void setmaxhalfinterval();
         void numOps(const int& minScale, const int& maxScale);        

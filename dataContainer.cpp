@@ -39,6 +39,11 @@ void CurvatureScale::setCurvatureArray(double* curvatureArray, int dataLength) {
     memcpy(CurvatureScale::curvatureArray, curvatureArray, dataLength * sizeof(double));
 }
 
+void CurvatureScale::setCurvatureArray(int dataLength) {
+    delete[] CurvatureScale::curvatureArray;
+    CurvatureScale::curvatureArray = new double[dataLength];
+}
+
 void CurvatureScale::setCurvature(double curvature, int index) {
     curvatureArray[index] = curvature;
 }
@@ -50,9 +55,7 @@ void CurvatureScale::setScale(double scale) {
 // DataContainer functions ---------------------------------------------------------------------------------------------------
 
 DataContainer::DataContainer(point* pointArray, int dataLength) {
-    DataContainer::pointArray= new point[dataLength];
-    memcpy(DataContainer::pointArray, pointArray, dataLength * sizeof(point));
-    curvatureScaleArray = new CurvatureScale[(dataLength*(dataLength+1))/2];
+    setPointArray(pointArray, dataLength);
 }
 
 // Destructor deletes the arrays and pointers so memory is not leaked
@@ -108,14 +111,19 @@ void DataContainer::putData(int scale, int index, double curvature) {
     this->curvatureScaleArray[scale].setCurvature(curvature, index);
 }
 
+void DataContainer::setCurvatureScaleArray(int dataLength) {
+    delete[] DataContainer::curvatureScaleArray;
+    DataContainer::curvatureScaleArray = new CurvatureScale[dataLength];
+    DataContainer::curvatureArrayLength = dataLength;
+}
+
 void DataContainer::setPointArray(point *pointArray, int dataLength) {
     delete[] DataContainer::pointArray;
     DataContainer::pointArray= new point[dataLength];
     memcpy(DataContainer::pointArray, pointArray, dataLength * sizeof(point));
     DataContainer::pointArrayLength = dataLength;
-    // delete[] curvatureScaleArray;
-    // curvatureScaleArray = new CurvatureScale[(dataLength*(dataLength+1))/2];
 }
+
 void DataContainer::setPointArray(int dataLength) {
     delete[] DataContainer::pointArray;
     DataContainer::pointArray= new point[dataLength];
