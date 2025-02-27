@@ -112,21 +112,14 @@ void DataContainer::setPointArray(point *pointArray, int dataLength) {
     delete[] DataContainer::pointArray;
     DataContainer::pointArray= new point[dataLength];
     memcpy(DataContainer::pointArray, pointArray, dataLength * sizeof(point));
-    delete[] curvatureScaleArray;
-    curvatureScaleArray = new CurvatureScale[(dataLength*(dataLength+1))/2];
+    DataContainer::pointArrayLength = dataLength;
+    // delete[] curvatureScaleArray;
+    // curvatureScaleArray = new CurvatureScale[(dataLength*(dataLength+1))/2];
 }
 void DataContainer::setPointArray(int dataLength) {
     delete[] DataContainer::pointArray;
     DataContainer::pointArray= new point[dataLength];
-}
-// intializes the original data to zero, automatially calculates data length
-void DataContainer::initDataZero(point *pointArray) {
-    delete[] DataContainer::pointArray;
-    int dataLength = sizeof(pointArray)/sizeof(pointArray[0]);
-    DataContainer::pointArray= new point[dataLength];
-    memcpy(DataContainer::pointArray, pointArray, dataLength * sizeof(point));
-    delete[] curvatureScaleArray;
-    curvatureScaleArray = new CurvatureScale[(dataLength*(dataLength+1))/2];
+    DataContainer::pointArrayLength = dataLength;
 }
 
 void DataContainer::setmaxhalfinterval(){
