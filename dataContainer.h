@@ -83,6 +83,7 @@ class DataContainer {
         void setIndex(int index, CurvatureScale* data);
         void putData(int scale, int index, double curvature);
         void setPointArray(point *pointArray, int dataLength);
+        void setPointArray(int dataLength);
         void initDataZero(point *pointArray);
         void setPoint(int index, point point);
         
