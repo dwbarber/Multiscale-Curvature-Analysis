@@ -10,6 +10,7 @@ using namespace std;
 //testing single execution method
 #include "fileHandler.h"
 #include "userData.h"
+#include "analysis.h"
 
 
 int main() {
@@ -64,7 +65,28 @@ int main() {
     uData.setAnalyisType(method);
   }
 
+  //set variables for function pointers
 
+
+
+  
+
+  //confirm user input to start analysis.
+  bool confirm = cliInput::getYesNo("Would you like to start the analysis?");
+  if (confirm){
+    double (*method1)(point,point,point);
+    //start the analysis
+    if(uData.getHybrid()){
+      double (*method2)(point,point,point);
+      analysis::hybridAnalysis(&uData, &data, *method1, *method2, data.getPointArrayLength());
+    }
+    else{
+      analysis::singleAnalysis(&uData, &data, *method1, data.getPointArrayLength());
+    }
+  }
+  else{
+    std::cout << "Analysis aborted" << std::endl;
+  }
   
   
 
