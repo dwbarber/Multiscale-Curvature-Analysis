@@ -92,6 +92,7 @@ int main() {
       
       
     }
+    //case for standard analysis
     else{
       int methodKey1 = uData.getAnalysisType();
       if (functionMapping.find(methodKey1) == functionMapping.end()) {
@@ -104,6 +105,15 @@ int main() {
   else{
     std::cout << "Analysis aborted" << std::endl;
   }
+
+  //once analysis is finished, write the data to a file.
+  string writePath = cliInput::getString("Please enter the file name to write the data to");
+  FileHandler::fileWrite(&data, writePath);
+
+
+  //analysis is complete. send a completion message.
+  std::cout << "Analysis complete. Data written to file." << std::endl;
+
   
   
 
