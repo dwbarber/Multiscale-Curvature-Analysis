@@ -84,11 +84,13 @@ void FileHandler::fileRead(string input, DataContainer* data) {
 }
 
 // Function is meant to write data to a CSV file
-int FileHandler::fileWrite(DataContainer* XSC){
-    std::string fileName;
+int FileHandler::fileWrite(DataContainer* XSC, string fileName){
+    
+    // Mar 18 2025: three lines below were removed to allow for file name to be passed in as a parameter
+    // std::string fileName;
+    // std::cout << "Enter file Name: ";
+    // std::cin >> fileName;
 
-    std::cout << "Enter file Name: ";
-    std::cin >> fileName;
     fileName += ".csv";
     std::ofstream myFile(fileName); // Creates or overwrites file
 

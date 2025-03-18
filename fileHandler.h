@@ -11,7 +11,7 @@ class FileHandler{
         FileHandler();
     	static int validateType();
         static void fileRead(std::string input, DataContainer* data); 
-        static int fileWrite(DataContainer* XSC);
+        static int fileWrite(DataContainer* XSC, string fileName);
         static bool validPath(const std::string& path);
         static std::string pathExtension(const std::string& path);
         static std::string remove_quotes(const std::string& input);
