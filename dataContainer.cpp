@@ -1,5 +1,8 @@
 #include "dataContainer.h"
 
+
+#include <iostream> // for testing purposes only
+
 // CurvatureScale functions ---------------------------------------------------------------------------------------------------
 
 CurvatureScale::CurvatureScale(double *curvatureArray, int dataLength, double scale, point *pointArray) {
@@ -89,11 +92,11 @@ int DataContainer::getCurvatureArrayLength() {
 }
 
 double DataContainer::getMinLength() {
-    return minLength;
+    return DataContainer::minLength;
 }
 
 double DataContainer::getMaxLength() {
-    return (minLength * maxHalfIntervalPossible);
+    return (DataContainer::minLength * DataContainer::maxHalfIntervalPossible);
 }
 
 double DataContainer::getmaxHalfIntervalPossible() {
@@ -132,7 +135,19 @@ void DataContainer::setPointArray(int dataLength) {
 
 void DataContainer::setmaxhalfinterval(){
     //we find the minimum length by averaging the length across the entire data, thatis, the smallest distance between two points
-    DataContainer::minLength = abs((DataContainer::pointArray[pointArrayLength].x)-(DataContainer::pointArray[0].x) / (DataContainer::pointArrayLength - 1));
+    DataContainer::minLength = fabs(((DataContainer::pointArray[pointArrayLength-1].x)-(DataContainer::pointArray[0].x)) / (DataContainer::pointArrayLength - 1));
+    
+    //FOR DEBUGGING
+    // std::cout<< DataContainer::pointArray[pointArrayLength-1].x << std::endl;
+    // std::cout<< DataContainer::pointArray[0].x << std::endl;
+
+    // std::cout << ((DataContainer::pointArray[pointArrayLength-1].x)-(DataContainer::pointArray[0].x)) << std::endl;
+    // std::cout <<9.9 / 99 << std::endl;
+    // std::cout <<9.9/99.<< std::endl;
+    // std::cout<< DataContainer::pointArrayLength - 1 << std::endl;
+    // std::cout<< minLength << std::endl;
+
+
     //we calculate the maximum length possible. First, we check to see if the data has an even or odd number of points
     //an even number of points results in an odd number of intervals. the number of intervals is always one less than the number of points
     //an odd number of points results in an even number of intervals.
