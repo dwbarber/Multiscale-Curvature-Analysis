@@ -1,6 +1,9 @@
 #ifndef FORMULA_H
 #define FORMULA_H
+#include <unordered_map>
+#include <functional>
 
+typedef double (*functionPointer)(point*, point*, point*);
 class Formula{
     /* Formulas used to calculate the curvature across three different points */
 
@@ -11,13 +14,13 @@ class Formula{
     // double finiteDiffAnalysis (double x1, double z1, double x2, double z2, double x3, double z3);
     // bool isAcute (double x1, double z1, double x2, double z2, double x3, double z3);
     public:
-        double herons (point *point1, point *point2, point *point3);
-        double parabola (point *point1, point *point2, point *point3);
-        double diffOfSlopes (point *point1, point *point2, point *point3);
-        double lagrangian (point *point1, point *point2, point *point3);
-        double finiteDiffAnalysis (point *point1, point *point2, point *point3);
+        static double herons (point *point1, point *point2, point *point3);
+        static double parabola (point *point1, point *point2, point *point3);
+        static double diffOfSlopes (point *point1, point *point2, point *point3);
+        static double lagrangian (point *point1, point *point2, point *point3);
+        static double finiteDiffAnalysis (point *point1, point *point2, point *point3);
         static bool isAcute (point *point1, point *point2, point *point3);
-
+        static std::unordered_map<int, functionPointer> funcMap();
 
 };
 

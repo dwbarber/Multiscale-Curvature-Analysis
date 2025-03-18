@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <unordered_map> // needed for the hashmap functionalityh
+#include <functional> // needed for the function pointer functionality in hashmap implementation
 #include "dataContainer.h"
 #include "formula.h"
 //OLD: replaced in favor of not using #include <Eigen/Dense> // https://gitlab.com/libeigen/eigen/-/releases/3.4.0 // to download library
@@ -9,11 +11,25 @@ using namespace std;
 
 
 class Formula{
-    public:
 
+    
+    public:
+    //returns the function map. This is used to determine which function to use based on the user's input
+    //store the function map into a variable, use hashmap methods to find correct method and check if exists
+    static std::unordered_map<int, functionPointer> funcMap() {
+        std::unordered_map<int, functionPointer> functionMap;
+    
+        functionMap[1] = &Formula::herons;
+        functionMap[2] = &Formula::parabola;
+        functionMap[3] = &Formula::diffOfSlopes;
+        functionMap[4] = &Formula::lagrangian;
+        functionMap[5] = &Formula::finiteDiffAnalysis;
+    
+        return functionMap;
+    }
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this fucntion follows Heron's formula for cuvature---------------------------------------------------------------------
-    double herons (point *point1, point *point2, point *point3){
+    static double herons (point *point1, point *point2, point *point3){
         double x1 = point1->x, z1 = point1->z, x2 = point2->x, z2 = point2->z, x3 = point3->x, z3 = point3->z, 
                curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
 
@@ -54,7 +70,7 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows a calculus method for determining curvature------------------------------------------------------
-    double parabola (point *point1, point *point2, point *point3){
+    static double parabola (point *point1, point *point2, point *point3){
         double Ax = point1->x, Az = point1->z, Bx = point2->x, Bz = point2->z, Cx = point3->x, Cz = point3->z, 
                a, b, c, Axpow2, Bxpow2, Cxpow2, detM, detMa, detMb, detMc, curve, first_deriv, second_deriv;
         
@@ -116,7 +132,7 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows difference of slopes method for determining curvature--------------------------------------------
-    double diffOfSlopes (point *point1, point *point2, point *point3){
+    static double diffOfSlopes (point *point1, point *point2, point *point3){
         double x1 = point1->x, z1 = point1->z, x2 = point2->x, z2 = point2->z, x3 = point3->x, z3 = point3->z,
                curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
         
@@ -156,7 +172,7 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows the 3-ordinate Lagrangian method in order to determine curvature---------------------------------
-    double lagrangian (point *point1, point *point2, point *point3){
+    static double lagrangian (point *point1, point *point2, point *point3){
         double x1 = point1->x, z1 = point1->z, x2 = point2->x, z2 = point2->z, x3 = point3->x, z3 = point3->z; 
         // Proper data hould never divide by 0
         return  ((2 * (z1))-(z2)-(z3))/pow((((x3) - (x1))/2), 2);
@@ -164,7 +180,7 @@ class Formula{
 
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows the Finite Difference Analysis method in order to determine curvature----------------------------
-    double finiteDiffAnalysis (point *point1, point *point2, point *point3){
+    static double finiteDiffAnalysis (point *point1, point *point2, point *point3){
         double x1 = point1->x, z1 = point1->z, x2 = point2->x, z2 = point2->z, x3 = point3->x, z3 = point3->z, 
                zPrime, zDoublePrime;
         // Proper data hould never divide by 0
@@ -199,6 +215,9 @@ class Formula{
 
         return (angle < 90.00);
     }
+
+
+    
 };
 
 // for testing functions, software not dependent on this function

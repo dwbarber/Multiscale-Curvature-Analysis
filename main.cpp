@@ -11,6 +11,7 @@ using namespace std;
 #include "fileHandler.h"
 #include "userData.h"
 #include "analysis.h"
+#include "formula.h"
 
 
 int main() {
@@ -66,19 +67,33 @@ int main() {
   }
 
   //set variables for function pointers
+  //create the map variable (use auto to make life easy)
+  auto functionMapping = Formula::funcMap();
 
-
-
-  
-
+ 
   //confirm user input to start analysis.
   bool confirm = cliInput::getYesNo("Would you like to start the analysis?");
   if (confirm){
-    double (*method1)(point,point,point);
+    //declare *method1 
+    int methodKey1 = uData.getAnalysisType();
+    if (functionMapping.find(methodKey1) == functionMapping.end()) {
+    std::cerr << "Error: Method " << methodKey1 << " not found in function mapping." << std::endl;  
+    }
+    else {
+      double (*method1)(point*,point*,point*) = functionMapping[methodKey1];
+    }
     //start the analysis
     if(uData.getHybrid()){
-      double (*method2)(point,point,point);
-      analysis::hybridAnalysis(&uData, &data, *method1, *method2, data.getPointArrayLength());
+      //if hybrid, declare *method2
+      int methodKey2 = uData.getAnalysisType();
+      if (functionMapping.find(methodKey1) == functionMapping.end()) {
+        std::cerr << "Error: Method " << methodKey1 << " not found in function mapping." << std::endl;  
+      }
+      else {
+        double (*method2)(point*,point*,point*) = functionMapping[methodKey2];
+        analysis::hybridAnalysis(&uData, &data, method1, method2, data.getPointArrayLength());
+      }
+      
     }
     else{
       analysis::singleAnalysis(&uData, &data, *method1, data.getPointArrayLength());
