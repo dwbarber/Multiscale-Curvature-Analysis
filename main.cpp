@@ -74,29 +74,31 @@ int main() {
   //confirm user input to start analysis.
   bool confirm = cliInput::getYesNo("Would you like to start the analysis?");
   if (confirm){
-    //declare *method1 
-    int methodKey1 = uData.getAnalysisType();
-    if (functionMapping.find(methodKey1) == functionMapping.end()) {
-    std::cerr << "Error: Method " << methodKey1 << " not found in function mapping." << std::endl;  
-    }
-    else {
-      double (*method1)(point*,point*,point*) = functionMapping[methodKey1];
-    }
+  
     //start the analysis
     if(uData.getHybrid()){
       //if hybrid, declare *method2
-      int methodKey2 = uData.getAnalysisType();
+      int methodKey1 = uData.getHybridSelection(0);
+      int methodKey2 = uData.getHybridSelection(1);
       if (functionMapping.find(methodKey1) == functionMapping.end()) {
         std::cerr << "Error: Method " << methodKey1 << " not found in function mapping." << std::endl;  
       }
-      else {
-        double (*method2)(point*,point*,point*) = functionMapping[methodKey2];
-        analysis::hybridAnalysis(&uData, &data, method1, method2, data.getPointArrayLength());
+      if (functionMapping.find(methodKey2) == functionMapping.end()) {
+        std::cerr << "Error: Method " << methodKey2 << " not found in function mapping." << std::endl;  
       }
+      double (*method1)(point*,point*,point*) = functionMapping[methodKey1];
+      double (*method2)(point*,point*,point*) = functionMapping[methodKey2];
+      analysis::hybridAnalysis(&uData, &data, method1, method2, data.getPointArrayLength());
+      
       
     }
     else{
-      analysis::singleAnalysis(&uData, &data, *method1, data.getPointArrayLength());
+      int methodKey1 = uData.getAnalysisType();
+      if (functionMapping.find(methodKey1) == functionMapping.end()) {
+        std::cerr << "Error: Method " << methodKey1 << " not found in function mapping." << std::endl;  
+      }
+      double (*method1)(point*,point*,point*) = functionMapping[methodKey1];
+      analysis::singleAnalysis(&uData, &data, method1, data.getPointArrayLength());
     }
   }
   else{
