@@ -8,7 +8,7 @@ class UserData{
     public:
         //setters
         bool setDataContainer(DataContainer dataContainer);
-        int setScaleBounds(double min, double max);
+        int setScaleBounds(double min, double max, DataContainer dataContainer);
         bool setAnalyisType(int method);
         bool setHybridSelection(int obtusemethod, int acutemethod);
         bool setInputFilePath(string path);

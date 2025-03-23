@@ -28,7 +28,7 @@ double cliInput::getDouble(string message){
     cout << message << "\n";
     string userInput;
     getline(cin, userInput);
-    int retVal;
+    double retVal;
     try {
         retVal = stod(userInput);
     }

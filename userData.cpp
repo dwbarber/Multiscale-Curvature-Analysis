@@ -13,18 +13,25 @@ using namespace std;
         UserData::dataContainer = dataContainer;
         return true;
     }
-    int UserData::setScaleBounds(double min, double max){
+    int UserData::setScaleBounds(double min, double max, DataContainer dataContainer){
+        std::cout << "setScaleBounds" << std::endl;
         //returns 0 if valid, 1 if minscale is invalid, 2 if maxscale is invalid, 3 if both are invalid
-
-        int minint = floor(min / getDataContainer().getMinLength());
-        int maxint = ceil(max / getDataContainer().getMinLength());
+        std::cout<< min << std::endl;
+        std::cout<<ceil(min / dataContainer.getMinLength())<<std::endl;
+        int minint = ceil(min / dataContainer.getMinLength());
+        int maxint = floor(max / dataContainer.getMinLength());
         bool minValid = true;
         bool maxValid = true;
+
+        
+        std::cout << "minint: " << minint << std::endl;
+        std::cout << "maxint: " << maxint << std::endl;
+
 
         if(minint < 1){
             minValid = false;
         }
-        if(maxint > getDataContainer().getmaxHalfIntervalPossible()){
+        if(maxint > dataContainer.getmaxHalfIntervalPossible()){
             maxValid = false;
         }
 

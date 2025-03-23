@@ -22,6 +22,8 @@ int main() {
   UserData uData;
   DataContainer data;
 
+  //THIS SHOULD BE CHANGED LATER BECAUSE THERE IS NO CHECK TO MAKE SURE DATA IS VALID
+  // uData.setDataContainer(data);
 
   //get file path, store it into the uData.
   uData.setInputFilePath(cliInput::getString("Please enter the file path"));
@@ -39,11 +41,11 @@ int main() {
   std::cout << "The maximum length possible is: " << data.getMaxLength() << std::endl;
 
   //get the minimum and maximum scales from the user.
-  int minscale = cliInput::getDouble("Please enter the minimum scale");
-  int maxscale = cliInput::getDouble("Please enter the maximum scale");
+  double minscale = cliInput::getDouble("Please enter the minimum scale");
+  double maxscale = cliInput::getDouble("Please enter the maximum scale");
 
   //set the scales into the uData object.
-  uData.setScaleBounds(minscale, maxscale);
+  uData.setScaleBounds(minscale, maxscale, data);
 
   //create the curvature array according to the minscale and maxscale.
   data.numOps(minscale, maxscale);
