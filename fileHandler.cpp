@@ -102,15 +102,24 @@ int FileHandler::fileWrite(DataContainer* XSC, string fileName){
         int BroadArraySize = XSC->getCurvatureArrayLength(); // Length of the Array holding ALL of the Curvature Data
         int CurvatureArraySize; // Length of the Array holding the Curvature Data for a Specific Scale
         myFile << "X-Position" << "," << "Scale" << "," << "Curvature" << std::endl;
+        std::cout<<"broad array size is: "<< BroadArraySize << std::endl;
         while (ScaleSwitching < BroadArraySize) {
-            CurvatureArraySize = XSC->getIndex(ScaleSwitching)->getLength();
+            CurvatureArraySize = XSC->getIndex(ScaleSwitching)->getLength(); //gets the length of the array corresponding to a particular scale
+            std::cout<<"CurvArraySize: " << CurvatureArraySize<< std::endl; // for debugging purposes
             CurvatureSwitching = 0; // Resetting the index for Array of points
             while (CurvatureSwitching < CurvatureArraySize){
+
                 myFile << XSC->getIndex(ScaleSwitching)->getPoint(CurvatureSwitching).x << "," 
                        << XSC->getIndex(ScaleSwitching)->getScale() << "," 
                        << XSC->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
+
+
+                std::cout<< XSC->getIndex(ScaleSwitching)->getPoint(CurvatureSwitching).x << "," //for debugging purposes
+                << XSC->getIndex(ScaleSwitching)->getScale() << "," 
+                << XSC->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
                 CurvatureSwitching++; // Changing the index for Array of points
             }
+            std::cout<<"scaleswitch: "<< ScaleSwitching<<std::endl;
             ScaleSwitching++; // Changing the index for Array of Curvature Data
         }
 

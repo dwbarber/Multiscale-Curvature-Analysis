@@ -51,7 +51,7 @@ int main() {
   std::cout<< "bounds set successfully" << std::endl;
 
   //create the curvature array according to the minscale and maxscale.
-  data.numOps(minscale, maxscale);
+  data.numOps(uData.getMinScale(), uData.getMaxScale());
 
   //print the number of operations to be performed.
   std::cout << "The number of operations to be performed is: " << data.getCurvatureArrayLength() << std::endl;

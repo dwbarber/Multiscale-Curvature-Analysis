@@ -10,6 +10,7 @@ CurvatureScale::CurvatureScale(double *curvatureArray, int dataLength, double sc
     memcpy(CurvatureScale::curvatureArray, curvatureArray, dataLength * sizeof(double));
     CurvatureScale::scale = scale;
     CurvatureScale::pointArray = pointArray;
+    CurvatureScale::dataLength = dataLength;
 }
 
 CurvatureScale::CurvatureScale() {
@@ -45,6 +46,7 @@ void CurvatureScale::setCurvatureArray(double* curvatureArray, int dataLength) {
 void CurvatureScale::setCurvatureArray(int dataLength) {
     delete[] CurvatureScale::curvatureArray;
     CurvatureScale::curvatureArray = new double[dataLength];
+    CurvatureScale::dataLength = dataLength;
 }
 
 void CurvatureScale::setCurvature(double curvature, int index) {
@@ -69,7 +71,7 @@ DataContainer::~DataContainer() {
 
 // getters
 CurvatureScale* DataContainer::getIndex(int index) {
-    return &(curvatureScaleArray[index]);
+    return &(this->curvatureScaleArray[index]);
 }
 
 // CurvatureScale* DataContainer::getScale(double scale){
@@ -112,7 +114,9 @@ void DataContainer::setPoint(int index, point point) {
     pointArray[index] = point;
 }
 void DataContainer::putData(int scale, int index, double curvature) {
-    this->curvatureScaleArray[scale].setCurvature(curvature, index);
+    this->curvatureScaleArray[scale].setCurvature(curvature, index); // puts the data into the array for a particular scale
+    // std::cout<<this->curvatureScaleArray[scale].getCurvature(index)<<std::endl; //check if data is actually being put correctly
+    // std::cout<<this->curvatureScaleArray[scale].getLength()<<std::endl;
 }
 
 void DataContainer::setCurvatureScaleArray(int dataLength) {
@@ -167,14 +171,16 @@ void DataContainer::setmaxhalfinterval(){
         //odd number of intervals
         //example: 4 points. this means there are 3 intervals, and the maximum half interval possible is 1.
         DataContainer::maxHalfIntervalPossible = (DataContainer::pointArrayLength / 2) - 1;
-        DataContainer::odd = false;
+        this->odd = false;
+        std::cout<<"even"<<std::endl;
     }
     else{
         //data is odd length
         //even number of intervals
         //example: 5 points. this means there are 4 intervals, and the maximum half interval possible is 2.
         DataContainer::maxHalfIntervalPossible = (DataContainer::pointArrayLength - 1) / 2;
-        DataContainer::odd = true;
+        this->odd = true;
+        
     }
     //finally, for the user, we multiply the minimum length by the maximum half interval possible to get the maximum length possible.
     //this value is shown later to the user as they select their bounds, as it represents the upper limit of what is possible to enter into the bounds.
@@ -186,14 +192,22 @@ void DataContainer::setmaxhalfinterval(){
 void DataContainer::numOps(const int& minScale, const int& maxScale){
     int64_t retval;
     //formula is different for calculating the number of operations if the data is odd or even.
-    int minops = (DataContainer::maxHalfIntervalPossible) - minScale + 1;
-    int maxops = (DataContainer::maxHalfIntervalPossible) - maxScale;
-    retval = minops * minops - maxops * maxops;
-    if (DataContainer::odd){
-        //the only part that is different depending on if the data is odd or even.
-        retval += minops - maxops;
-    }
+    int minops = (DataContainer::pointArrayLength - 2*minScale);
+    std::cout<<"minops"<<minops<<std::endl;
+    int maxops = (DataContainer::pointArrayLength - 2*maxScale);
+    std::cout<<"maxops"<<maxops<<std::endl;
+    retval = (((minops - maxops)/2+1)*(minops + maxops))/2;
+    std::cout<<"minscale"<<minScale<<std::endl;
+    std::cout<<"maxscale"<<maxScale<<std::endl;
+
+
+    //retval is the total number of curvatures to be made. 
     //the total number of operations to be performed = indexes in the array.
     DataContainer::curvatureScaleArray = new CurvatureScale[retval];
+    for (int i = minScale; i < maxScale+1; i++){ //set the length of each array
+        //print the length to be set
+        std::cout << "Setting length of array " << i << " to " << DataContainer::pointArrayLength  - 2*i << std::endl;
+        DataContainer::curvatureScaleArray[i].setCurvatureArray(DataContainer::pointArrayLength - 2*i);
+    }
     DataContainer::curvatureArrayLength = retval;
 }
