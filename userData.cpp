@@ -7,10 +7,10 @@ using namespace std;
 
     //setters
 
-    bool UserData::setDataContainer(DataContainer dataContainer){
+    bool UserData::setDataContainer(DataContainer* dataContainer){
         // Assuming dataContainer is a DataContainer object
         // You might need to implement a mapping from string to DataContainer
-        UserData::dataContainer = dataContainer;
+        this->dataContainer = dataContainer;
         return true;
     }
     int UserData::setScaleBounds(double min, double max, DataContainer dataContainer){
@@ -27,17 +27,20 @@ using namespace std;
         std::cout << "minint: " << minint << std::endl;
         std::cout << "maxint: " << maxint << std::endl;
 
-
+        std::cout <<"check minint" << std::endl;
         if(minint < 1){
             minValid = false;
         }
+        std::cout <<"check maxint" << std::endl;
         if(maxint > dataContainer.getmaxHalfIntervalPossible()){
             maxValid = false;
         }
-
+        std::cout <<"now return" << std::endl;
         if(minValid && maxValid){
-            userMinScale = minint;
-            userMaxScale = maxint;
+            std::cout <<"success" << std::endl;
+            this->userMinScale = minint;
+            this->userMaxScale = maxint;
+
             return 0;
         }
         else if(!minValid && !maxValid){
@@ -80,7 +83,7 @@ using namespace std;
     string UserData::getInputFilePath(){
         return inputFilepath;
     }
-    DataContainer UserData::getDataContainer(){
+    DataContainer* UserData::getDataContainer(){
         return dataContainer;
     }
     int UserData::getMinScale(){

@@ -13,6 +13,7 @@ FileHandler::FileHandler() {}
 
 // Function is meant to read a CSV file and return an array of points
 void FileHandler::fileRead(string input, DataContainer* data) {
+    std::cout<<"reading file"<<std::endl;
     string filePath = remove_quotes(input); // Remove quotes from the input string
 
     // Check if the file exists
@@ -46,8 +47,9 @@ void FileHandler::fileRead(string input, DataContainer* data) {
         file.seekg(0, ios::beg);    
 
         // Allocate point array
+        std::cout<<"set point array"<<std::endl;
         data->setPointArray(ArraySize);
-        
+        std::cout<<"set successful"<<std::endl;
         // Second loop: Read data into array
         int ite = 0;
         

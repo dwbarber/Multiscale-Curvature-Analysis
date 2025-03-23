@@ -7,7 +7,7 @@ using namespace std;
 class UserData{
     public:
         //setters
-        bool setDataContainer(DataContainer dataContainer);
+        bool setDataContainer(DataContainer* dataContainer);
         int setScaleBounds(double min, double max, DataContainer dataContainer);
         bool setAnalyisType(int method);
         bool setHybridSelection(int obtusemethod, int acutemethod);
@@ -16,7 +16,7 @@ class UserData{
 
 
         //getters
-        DataContainer getDataContainer();
+        DataContainer* getDataContainer();
         int getMinScale();
         int getMaxScale();
         int getAnalysisType();
@@ -34,7 +34,7 @@ class UserData{
         int userMinScale;
         int userMaxScale;
     
-        DataContainer dataContainer;
+        DataContainer* dataContainer;
 
         int analysisType;
         bool hybrid;

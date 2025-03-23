@@ -62,7 +62,8 @@ class DataContainer {
     public:
 
         // Constructors 
-        DataContainer() {};
+        DataContainer() : pointArray(nullptr), curvatureScaleArray(nullptr), pointArrayLength(0), curvatureArrayLength(0), minLength(0), maxHalfIntervalPossible(0), odd(false) {}
+
         DataContainer(point* pointArray, int dataLength);
         
         // Destructor deletes the arrays and pointers so memory is not leaked

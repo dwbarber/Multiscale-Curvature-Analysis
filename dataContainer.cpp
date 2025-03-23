@@ -57,7 +57,8 @@ void CurvatureScale::setScale(double scale) {
 
 // DataContainer functions ---------------------------------------------------------------------------------------------------
 
-DataContainer::DataContainer(point* pointArray, int dataLength) {
+
+DataContainer::DataContainer(point* pointArray, int dataLength) : pointArray(nullptr) {
     setPointArray(pointArray, dataLength);
 }
 
@@ -128,14 +129,22 @@ void DataContainer::setPointArray(point *pointArray, int dataLength) {
 }
 
 void DataContainer::setPointArray(int dataLength) {
-    delete[] DataContainer::pointArray;
-    DataContainer::pointArray= new point[dataLength];
-    DataContainer::pointArrayLength = dataLength;
+    std::cout<<"setting point array with length " << dataLength << std::endl;
+    if(this->pointArray){
+        std::cout<<"array already exists, clearing"<<std::endl;
+        if (this->pointArray) {
+            delete[] this->pointArray;
+            this->pointArray = nullptr;
+        }
+    }
+    std::cout<<"make new array"<<std::endl;
+    this->pointArray= new point[dataLength];
+    this->pointArrayLength = dataLength;
 }
 
 void DataContainer::setmaxhalfinterval(){
     //we find the minimum length by averaging the length across the entire data, thatis, the smallest distance between two points
-    DataContainer::minLength = fabs(((DataContainer::pointArray[pointArrayLength-1].x)-(DataContainer::pointArray[0].x)) / (DataContainer::pointArrayLength - 1));
+   this->minLength = fabs(((DataContainer::pointArray[pointArrayLength-1].x)-(DataContainer::pointArray[0].x)) / (DataContainer::pointArrayLength - 1));
     
     //FOR DEBUGGING
     // std::cout<< DataContainer::pointArray[pointArrayLength-1].x << std::endl;

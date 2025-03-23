@@ -23,7 +23,8 @@ int main() {
   DataContainer data;
 
   //THIS SHOULD BE CHANGED LATER BECAUSE THERE IS NO CHECK TO MAKE SURE DATA IS VALID
-  // uData.setDataContainer(data);
+  std::cout<< "ref data container" << std::endl;
+  // uData.setDataContainer(&data);
 
   //get file path, store it into the uData.
   uData.setInputFilePath(cliInput::getString("Please enter the file path"));
@@ -46,6 +47,8 @@ int main() {
 
   //set the scales into the uData object.
   uData.setScaleBounds(minscale, maxscale, data);
+
+  std::cout<< "bounds set successfully" << std::endl;
 
   //create the curvature array according to the minscale and maxscale.
   data.numOps(minscale, maxscale);
