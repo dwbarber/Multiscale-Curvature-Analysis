@@ -24,7 +24,7 @@ int main() {
 
   //THIS SHOULD BE CHANGED LATER BECAUSE THERE IS NO CHECK TO MAKE SURE DATA IS VALID
   std::cout<< "ref data container" << std::endl;
-  // uData.setDataContainer(&data);
+  uData.setDataContainer(&data);
 
   //get file path, store it into the uData.
   uData.setInputFilePath(cliInput::getString("Please enter the file path"));
@@ -46,7 +46,7 @@ int main() {
   double maxscale = cliInput::getDouble("Please enter the maximum scale");
 
   //set the scales into the uData object.
-  uData.setScaleBounds(minscale, maxscale, data);
+  uData.setScaleBounds(minscale, maxscale);
 
   std::cout<< "bounds set successfully" << std::endl;
 
