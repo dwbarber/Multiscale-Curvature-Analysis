@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(multiscale-curvature-analysis)
@@ -9,7 +9,7 @@ include(FetchContent)
 FetchContent_Declare(
     wxWidgets
     GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
-    GIT_TAG        v3.2.2.1 # Replace with the desired version or branch
+    GIT_TAG        v3.2.7.1 # Replace with the desired version or branch
 )
 
 # Make wxWidgets available
