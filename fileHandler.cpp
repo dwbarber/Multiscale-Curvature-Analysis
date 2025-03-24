@@ -95,11 +95,11 @@ int FileHandler::fileWrite(DataContainer* XSC, string fileName){
 
     fileName += ".csv";
     std::ofstream myFile(fileName); // Creates or overwrites file
-
+    
     if (myFile.is_open()) {
         int ScaleSwitching = 0;
         int CurvatureSwitching;
-        int BroadArraySize = XSC->getCurvatureArrayLength(); // Length of the Array holding ALL of the Curvature Data
+        int64_t BroadArraySize = XSC->getCurvatureArrayLength(); // Length of the Array holding ALL of the Curvature Data
         int CurvatureArraySize; // Length of the Array holding the Curvature Data for a Specific Scale
         myFile << "X-Position" << "," << "Scale" << "," << "Curvature" << std::endl;
         std::cout<<"broad array size is: "<< BroadArraySize << std::endl;
