@@ -90,7 +90,7 @@ int DataContainer::getPointArrayLength() {
     return pointArrayLength;
 }
 
-int DataContainer::getCurvatureArrayLength() {
+int64_t DataContainer::getCurvatureArrayLength() {
     return curvatureArrayLength;
 }
 

@@ -72,7 +72,7 @@ class DataContainer {
         // getters
         CurvatureScale* getIndex(int index);
         CurvatureScale* getScale(double scale);
-        int getCurvatureArrayLength();
+        int64_t getCurvatureArrayLength();
 
 
 
@@ -102,7 +102,7 @@ class DataContainer {
         
         // This array stores a list of curvature scale objects. Each object stores the curvature array at a scale
         CurvatureScale* curvatureScaleArray;
-        int curvatureArrayLength;
+        int64_t curvatureArrayLength;
 
         //Properties of data
         double minLength;

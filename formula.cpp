@@ -130,8 +130,7 @@ const double PI = 3.14159265358979323846;
 // 1's correspond to first coordinate pair, 2's belong to second coordinate pair, 3's belong to third coordinate pair-----
 // this function follows difference of slopes method for determining curvature--------------------------------------------
     double Formula::diffOfSlopes (point *point1, point *point2, point *point3){
-        double x1 = point1->x, z1 = point1->z, x2 = point2->x, z2 = point2->z, x3 = point3->x, z3 = point3->z,
-               curve, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC, yfor, sideA, sideB, sideC, SP;
+        double x1 = point1->x, z1 = point1->z, x2 = point2->x, z2 = point2->z, x3 = point3->x, z3 = point3->z, ABX, ABZ, BCX, BCZ, SlopeAB, SlopeBC;
         
         ABX = x1-x2;
         ABZ = z1-z2;
