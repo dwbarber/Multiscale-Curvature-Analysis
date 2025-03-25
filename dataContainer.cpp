@@ -204,6 +204,12 @@ void DataContainer::numOps(const int& minScale, const int& maxScale){
     //retval is the total number of curvatures to be made. 
     //the total number of operations to be performed = indexes in the array.
     
+    //check if too many curvatures for 32-bit mode
+    if(retval > std::numeric_limits<int>::max()){
+        std::cerr << "Error: Too many curvatures to calculate.\nPlease reduce number of curvatures, or relaunch in 64-bit mode." << std::endl;
+        return;
+    }
+
     try {
         std::cout << "Allocating memory for " << retval << " curvatures" << std::endl;
         //check if retval exceeds std::numeric_limits<int>::max()
