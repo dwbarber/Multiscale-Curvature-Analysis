@@ -5,6 +5,7 @@
 #include "dataContainer.h"
 #include"userInputCLI.h"
 #include<string>
+#include<chrono>
 using namespace std;
 
 //testing single execution method
@@ -85,7 +86,10 @@ int main() {
  
   //confirm user input to start analysis.
   bool confirm = cliInput::getYesNo("Would you like to start the analysis?");
+  // record start time
+  std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
   if (confirm){
+    
   
     //start the analysis
     if(uData.getHybrid()){
@@ -117,6 +121,9 @@ int main() {
   else{
     std::cout << "Analysis aborted" << std::endl;
   }
+  // record end time, calculate difference
+  std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+  std::cout << "Time taken to perform analysis: " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << " seconds" << std::endl;
 
   //once analysis is finished, write the data to a file.
   string writePath = cliInput::getString("Please enter the file name to write the data to");
