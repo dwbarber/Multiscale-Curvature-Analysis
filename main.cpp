@@ -127,9 +127,10 @@ int main() {
 
   //once analysis is finished, write the data to a file.
   string writePath = cliInput::getString("Please enter the file name to write the data to");
+  std::cout<<"writing to file"<<std::endl;
+
+  //write to the file
   FileHandler::fileWrite(&data, writePath);
-
-
   //analysis is complete. send a completion message.
   std::cout << "Analysis complete. Data written to file." << std::endl;
 

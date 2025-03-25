@@ -50,7 +50,10 @@ void CurvatureScale::setCurvatureArray(int dataLength) {
 }
 
 void CurvatureScale::setCurvature(double curvature, int index) {
-    curvatureArray[index] = curvature;
+    std::cout<<"setting curvature" << std::endl;
+    std::cout<<"array length: " << dataLength << std::endl;
+    std::cout<<"index: " << index << std::endl;
+    this->curvatureArray[index] = curvature;
 }
 
 void CurvatureScale::setScale(double scale) {
