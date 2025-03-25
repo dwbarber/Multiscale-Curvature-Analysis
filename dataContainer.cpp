@@ -203,11 +203,37 @@ void DataContainer::numOps(const int& minScale, const int& maxScale){
 
     //retval is the total number of curvatures to be made. 
     //the total number of operations to be performed = indexes in the array.
-    DataContainer::curvatureScaleArray = new CurvatureScale[retval];
-    for (int i = minScale; i < maxScale+1; i++){ //set the length of each array
-        //print the length to be set
-        std::cout << "Setting length of array " << i << " to " << DataContainer::pointArrayLength  - 2*i << std::endl;
-        DataContainer::curvatureScaleArray[i].setCurvatureArray(DataContainer::pointArrayLength - 2*i);
+    
+    //check if too many curvatures for 32-bit mode
+    if(retval > std::numeric_limits<int>::max()){
+        std::cerr << "Error: Too many curvatures to calculate.\nPlease reduce number of curvatures, or relaunch in 64-bit mode." << std::endl;
+        return;
     }
-    DataContainer::curvatureArrayLength = retval;
+
+    try {
+        std::cout << "Allocating memory for " << retval << " CurvatureScales" << std::endl;
+        // Check if retval exceeds std::numeric_limits<int>::max()
+        if (retval > std::numeric_limits<int>::max()) {
+            throw std::bad_alloc();
+        }
+
+        // Allocate memory for the array of CurvatureScales
+        DataContainer::curvatureScaleArray = new CurvatureScale[maxScale - minScale + 1];
+
+        // Dynamically allocate memory for each CurvatureScale's curvatureArray
+        for (int i = minScale; i <= maxScale; ++i) {
+            int length = DataContainer::pointArrayLength - 2 * i;
+            if (length <= 0) {
+                throw std::invalid_argument("Invalid length for curvatureArray");
+            }
+            std::cout << "Setting length of array " << i << " to " << length << std::endl;
+            DataContainer::curvatureScaleArray[i - minScale].setCurvatureArray(length);
+        }
+
+        DataContainer::curvatureArrayLength = retval;
+    } catch (const std::bad_alloc& e) {
+        std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+    } catch (const std::invalid_argument& e) {
+        std::cerr << "Invalid argument: " << e.what() << std::endl;
+    }
 }
