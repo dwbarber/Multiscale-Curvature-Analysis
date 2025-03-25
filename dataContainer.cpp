@@ -203,8 +203,12 @@ void DataContainer::numOps(const int& minScale, const int& maxScale){
 
     //retval is the total number of curvatures to be made. 
     //the total number of operations to be performed = indexes in the array.
-    DataContainer::curvatureScaleArray = new CurvatureScale[retval];
     
+    try {
+        DataContainer::curvatureScaleArray = new CurvatureScale[retval];
+    } catch (const std::bad_alloc& e) {
+        std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+    }
     for (int i = minScale; i < maxScale+1; i++){ //set the length of each array
         //print the length to be set
         std::cout << "Setting length of array " << i << " to " << DataContainer::pointArrayLength  - 2*i << std::endl;
