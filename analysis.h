@@ -4,6 +4,7 @@
 #include "dataContainer.h"
 #include "userInputCLI.h"
 #include "userData.h"
+#include <omp.h>
 
 
 //extension of dataContainer class to include analysis functions

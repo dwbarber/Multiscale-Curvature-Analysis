@@ -17,7 +17,7 @@ void analysis::singleAnalysis(UserData* uData, DataContainer* data, double (*met
     double curvature;
     int minScale = uData->getMinScale();
     int maxScale = uData->getMaxScale();
-
+    #pragma omp parallel for
     for(int scale = minScale; scale <= maxScale; scale++){ //iterate over scales
         for(int point = scale; point < numPoints - scale; point++){ //iterate over points
             // point is the center point 
