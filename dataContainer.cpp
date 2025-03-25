@@ -205,6 +205,11 @@ void DataContainer::numOps(const int& minScale, const int& maxScale){
     //the total number of operations to be performed = indexes in the array.
     
     try {
+        std::cout << "Allocating memory for " << retval << " curvatures" << std::endl;
+        //check if retval exceeds std::numeric_limits<int>::max()
+        if(retval > std::numeric_limits<int>::max()){
+            throw std::bad_alloc();
+        }
         DataContainer::curvatureScaleArray = new CurvatureScale[retval];
     } catch (const std::bad_alloc& e) {
         std::cerr << "Memory allocation failed: " << e.what() << std::endl;

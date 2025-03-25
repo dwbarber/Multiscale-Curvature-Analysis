@@ -15,6 +15,13 @@ using namespace std;
 
 
 int main() {
+  if (sizeof(void*) == 8) {
+    std::cout << "Running as a 64-bit application." << std::endl;
+  } else if (sizeof(void*) == 4) {
+      std::cout << "Running as a 32-bit application." << std::endl;
+  } else {
+      std::cout << "Unknown architecture." << std::endl;
+  }
   
   std::cout << "This program was developed by Worcester Polytechnic Institute's Surface Metrology Lab.\nFor more information, please visit https://www.surfacemetrology.org/ and https://wp.wpi.edu/surfacemetrology/.\nThis software is distributed under the GPL-3.0 License.\n";
 
