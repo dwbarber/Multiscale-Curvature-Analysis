@@ -131,7 +131,7 @@ void DataContainer::setCurvatureScaleArray(int dataLength) {
 void DataContainer::setPointArray(point *pointArray, int dataLength) {
     delete[] DataContainer::pointArray;
     DataContainer::pointArray= new point[dataLength];
-    memcpy(DataContainer::pointArray, pointArray, dataLength * sizeof(point));
+    memcpy(DataContainer::pointArray, pointArray,   dataLength * sizeof(point));
     DataContainer::pointArrayLength = dataLength;
 }
 
@@ -233,7 +233,7 @@ void DataContainer::numOps(const int& minScale, const int& maxScale){
             DataContainer::curvatureScaleArray[i - minScale].setCurvatureArray(length);
         }
 
-        DataContainer::curvatureArrayLength = retval;
+        DataContainer::curvatureArrayLength = maxScale - minScale + 1;
     } catch (const std::bad_alloc& e) {
         std::cerr << "Memory allocation failed: " << e.what() << std::endl;
     } catch (const std::invalid_argument& e) {

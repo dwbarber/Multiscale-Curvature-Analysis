@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <vector>
 #include "fileHandler.h"
+#include "userData.h"
 
 using namespace std;
 
@@ -86,8 +87,12 @@ void FileHandler::fileRead(string input, DataContainer* data) {
 }
 
 // Function is meant to write data to a CSV file
-int FileHandler::fileWrite(DataContainer* XSC, string fileName){
+int FileHandler::fileWrite(UserData* uData, string fileName){
     
+    // Get the DataContainer object from the UserData object
+    DataContainer* XSC = uData->getDataContainer();
+
+
     // Mar 18 2025: three lines below were removed to allow for file name to be passed in as a parameter
     // std::string fileName;
     // std::cout << "Enter file Name: ";
@@ -107,20 +112,28 @@ int FileHandler::fileWrite(DataContainer* XSC, string fileName){
             CurvatureArraySize = XSC->getIndex(ScaleSwitching)->getLength(); //gets the length of the array corresponding to a particular scale
             std::cout<<"CurvArraySize: " << CurvatureArraySize<< std::endl; // for debugging purposes
             CurvatureSwitching = 0; // Resetting the index for Array of points
+            std::cout<<XSC->getIndex(ScaleSwitching)<<std::endl;
             while (CurvatureSwitching < CurvatureArraySize){
+                std::cout<<"write a curvature"<<std::endl;
+                std::cout<<"scaleswitch is: "<< ScaleSwitching<<std::endl;
+                std::cout<<"curvatureswitch is: "<< CurvatureSwitching<<std::endl;
 
-                myFile << XSC->getIndex(ScaleSwitching)->getPoint(CurvatureSwitching).x << "," 
+                std::cout<<"curvature written was:"<<std::endl;
+                std::cout<< "X"<<XSC->getPointAddress(CurvatureSwitching+ScaleSwitching+uData->getMinScale())->x << std::endl;
+                std::cout<< "S"<<XSC->getIndex(ScaleSwitching)->getScale() << std::endl;
+                std::cout<< "C"<<XSC->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
+                
+                myFile << XSC->getPointAddress(CurvatureSwitching+ScaleSwitching+uData->getMinScale())->x<< "," 
                        << XSC->getIndex(ScaleSwitching)->getScale() << "," 
                        << XSC->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
 
-
-                std::cout<< XSC->getIndex(ScaleSwitching)->getPoint(CurvatureSwitching).x << "," //for debugging purposes
-                << XSC->getIndex(ScaleSwitching)->getScale() << "," 
-                << XSC->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
+               
                 CurvatureSwitching++; // Changing the index for Array of points
             }
-            std::cout<<"scaleswitch: "<< ScaleSwitching<<std::endl;
+            
             ScaleSwitching++; // Changing the index for Array of Curvature Data
+            std::cout<<"scaleswitch: "<< ScaleSwitching<<std::endl;
+            std::cout<<"broadarraysize"<< BroadArraySize<<std::endl;
         }
 
         myFile.close();

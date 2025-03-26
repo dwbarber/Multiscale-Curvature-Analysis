@@ -109,6 +109,8 @@ class DataContainer {
         double maxLength;
         int maxHalfIntervalPossible;
         bool odd;
+
+        
 };
 
 #endif
