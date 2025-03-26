@@ -50,13 +50,13 @@ void CurvatureScale::setCurvatureArray(int dataLength) {
 }
 
 void CurvatureScale::setCurvature(double curvature, int index) {
-    std::cout<<"setting curvature" << std::endl;
-    std::cout<<"array length: " << dataLength << std::endl;
-    std::cout<<"index: " << index << std::endl;
+    // std::cout<<"setting curvature" << std::endl; for debugging
+    // std::cout<<"array length: " << dataLength << std::endl;
+    // std::cout<<"index: " << index << std::endl;
     this->curvatureArray[index] = curvature;
 }
 
-void CurvatureScale::setScale(double scale) {
+void CurvatureScale::setScale(int scale) {
     CurvatureScale::scale = scale;
 }
 
@@ -231,6 +231,7 @@ void DataContainer::numOps(const int& minScale, const int& maxScale){
             }
             std::cout << "Setting length of array " << i << " to " << length << std::endl;
             DataContainer::curvatureScaleArray[i - minScale].setCurvatureArray(length);
+            DataContainer::curvatureScaleArray[i - minScale].setScale(i);
         }
 
         DataContainer::curvatureArrayLength = maxScale - minScale + 1;

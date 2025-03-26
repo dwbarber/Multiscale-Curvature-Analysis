@@ -120,11 +120,11 @@ int FileHandler::fileWrite(UserData* uData, string fileName){
 
                 std::cout<<"curvature written was:"<<std::endl;
                 std::cout<< "X"<<XSC->getPointAddress(CurvatureSwitching+ScaleSwitching+uData->getMinScale())->x << std::endl;
-                std::cout<< "S"<<XSC->getIndex(ScaleSwitching)->getScale() << std::endl;
+                std::cout<< "S"<<XSC->getIndex(ScaleSwitching)->getScale() * XSC->getMinLength()  << std::endl;
                 std::cout<< "C"<<XSC->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
                 
                 myFile << XSC->getPointAddress(CurvatureSwitching+ScaleSwitching+uData->getMinScale())->x<< "," 
-                       << XSC->getIndex(ScaleSwitching)->getScale() << "," 
+                       << XSC->getIndex(ScaleSwitching)->getScale() * XSC->getMinLength() << "," 
                        << XSC->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
 
                
