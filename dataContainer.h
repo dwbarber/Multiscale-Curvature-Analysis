@@ -47,10 +47,10 @@ class CurvatureScale {
         * Sets the value of the scale parameter
         * @param scale: The scale at which this data was calculated
         */
-        void setScale(double scale);
+        void setScale(int scale);
 
     private:
-        double scale;
+        int scale;
         double* curvatureArray;
         point* pointArray;
         int dataLength;
@@ -109,6 +109,8 @@ class DataContainer {
         double maxLength;
         int maxHalfIntervalPossible;
         bool odd;
+
+        
 };
 
 #endif

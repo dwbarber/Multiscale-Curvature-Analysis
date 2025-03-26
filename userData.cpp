@@ -18,8 +18,15 @@ using namespace std;
         //returns 0 if valid, 1 if minscale is invalid, 2 if maxscale is invalid, 3 if both are invalid
         std::cout<< min << std::endl;
         std::cout<<ceil(min / this->dataContainer->getMinLength())<<std::endl;
+        
         int minint = ceil(min / this->dataContainer->getMinLength());
         int maxint = floor(max / this->dataContainer->getMinLength());
+        if (min < this->dataContainer->getMinLength()) {
+            minint = 1;
+        }
+        if (max > this->dataContainer->getMaxLength()) {
+            max = this->dataContainer->getmaxHalfIntervalPossible();
+        }
         bool minValid = true;
         bool maxValid = true;
 

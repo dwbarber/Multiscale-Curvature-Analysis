@@ -23,8 +23,8 @@ void analysis::singleAnalysis(UserData* uData, DataContainer* data, double (*met
             // point is the center point 
             // Call the function on the points
             curvature = method( data->getPointAddress(point - scale), data->getPointAddress(point), data->getPointAddress(point + scale)); 
-            std::cout<<curvature<<std::endl;
-            data->putData(scale, point, curvature); //add curvature to data
+            // std::cout<<curvature<<std::endl;
+            data->putData(scale - minScale, point-scale, curvature); //add curvature to data
         }
     }
 }
@@ -56,7 +56,7 @@ void analysis::hybridAnalysis(UserData* uData, DataContainer* data, double (*met
 
             }
 
-            data->putData(scale, point, curvature); //add curvature to data
+            data->putData(scale-minScale, point-scale, curvature); //add curvature to data
         }
     }
 }
