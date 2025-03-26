@@ -72,16 +72,17 @@ class DataContainer {
         // getters
         CurvatureScale* getIndex(int index);
         CurvatureScale* getScale(double scale);
-        int64_t getCurvatureArrayLength();
+        int getCurvatureArrayLength();
+
 
 
 
         point getPoint(int index);
         int getPointArrayLength();
+        int64_t getNumOps();
         point* getPointAddress(int index);
         double getMinLength();
         double getMaxLength();
-       
         double getmaxHalfIntervalPossible();
         // setters
         void setIndex(int index, CurvatureScale* data);
@@ -91,7 +92,7 @@ class DataContainer {
         void setCurvatureScaleArray(int dataLength);
         void setPoint(int index, point point);
         void setmaxhalfinterval();
-        void numOps(const int& minScale, const int& maxScale);        
+        void setNumOps(const int& minScale, const int& maxScale);        
         
         friend class UserData;
         
@@ -109,6 +110,9 @@ class DataContainer {
         double maxLength;
         int maxHalfIntervalPossible;
         bool odd;
+
+        //Property of analysis
+        int64_t numOps;
 
         
 };

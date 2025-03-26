@@ -18,12 +18,14 @@ void analysis::singleAnalysis(UserData* uData, DataContainer* data, double (*met
     int minScale = uData->getMinScale();
     int maxScale = uData->getMaxScale();
 
+    // Parallelize the outer loop for better performance
+    #pragma omp parallel for private(curvature) schedule(dynamic)
     for(int scale = minScale; scale <= maxScale; scale++){ //iterate over scales
         for(int point = scale; point < numPoints - scale; point++){ //iterate over points
             // point is the center point 
             // Call the function on the points
             curvature = method( data->getPointAddress(point - scale), data->getPointAddress(point), data->getPointAddress(point + scale)); 
-            // std::cout<<curvature<<std::endl;
+            // Store the result in the data container
             data->putData(scale - minScale, point-scale, curvature); //add curvature to data
         }
     }
