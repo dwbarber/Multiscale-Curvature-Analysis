@@ -5,16 +5,16 @@ project(multiscale-curvature-analysis)
 
 
 
-include(FetchContent)
+# include(FetchContent)
 
-FetchContent_Declare(
-    wxWidgets
-    GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
-    GIT_TAG        v3.2.7.1 # Replace with the desired version or branch
-)
+# FetchContent_Declare(
+#     wxWidgets
+#     GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
+#     GIT_TAG        v3.2.7.1 # Replace with the desired version or branch
+# )
 
 # Make wxWidgets available
-FetchContent_MakeAvailable(wxWidgets)
+# FetchContent_MakeAvailable(wxWidgets)
 
 add_executable(main main.cpp)
 
@@ -32,5 +32,5 @@ if (OpenMP_CXX_FOUND)
 endif()
 
 
-target_link_libraries(main PRIVATE wx::core wx::base fileHandler formula userData analysis dataContainer userInputCLI gui)
+target_link_libraries(main fileHandler formula userData analysis dataContainer userInputCLI gui)
 
