@@ -50,10 +50,13 @@ void CurvatureScale::setCurvatureArray(int dataLength) {
 }
 
 void CurvatureScale::setCurvature(double curvature, int index) {
-    curvatureArray[index] = curvature;
+    // std::cout<<"setting curvature" << std::endl; for debugging
+    // std::cout<<"array length: " << dataLength << std::endl;
+    // std::cout<<"index: " << index << std::endl;
+    this->curvatureArray[index] = curvature;
 }
 
-void CurvatureScale::setScale(double scale) {
+void CurvatureScale::setScale(int scale) {
     CurvatureScale::scale = scale;
 }
 
@@ -128,7 +131,7 @@ void DataContainer::setCurvatureScaleArray(int dataLength) {
 void DataContainer::setPointArray(point *pointArray, int dataLength) {
     delete[] DataContainer::pointArray;
     DataContainer::pointArray= new point[dataLength];
-    memcpy(DataContainer::pointArray, pointArray, dataLength * sizeof(point));
+    memcpy(DataContainer::pointArray, pointArray,   dataLength * sizeof(point));
     DataContainer::pointArrayLength = dataLength;
 }
 
@@ -228,9 +231,10 @@ void DataContainer::numOps(const int& minScale, const int& maxScale){
             }
             std::cout << "Setting length of array " << i << " to " << length << std::endl;
             DataContainer::curvatureScaleArray[i - minScale].setCurvatureArray(length);
+            DataContainer::curvatureScaleArray[i - minScale].setScale(i);
         }
 
-        DataContainer::curvatureArrayLength = retval;
+        DataContainer::curvatureArrayLength = maxScale - minScale + 1;
     } catch (const std::bad_alloc& e) {
         std::cerr << "Memory allocation failed: " << e.what() << std::endl;
     } catch (const std::invalid_argument& e) {
