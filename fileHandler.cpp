@@ -101,11 +101,13 @@ int FileHandler::fileWrite(UserData* uData, string fileName) {
     }
 
     fileName += ".csv";
+
     std::ofstream myFile(fileName, std::ios::out | std::ios::trunc);
     if (!myFile.is_open()) {
         std::cerr << "Unable to open file." << std::endl;
         return 1;
     }
+
 
     // Use a stringstream as a buffer
     std::ostringstream buffer;
