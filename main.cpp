@@ -59,10 +59,10 @@ int main() {
   std::cout<< "bounds set successfully" << std::endl;
 
   //create the curvature array according to the minscale and maxscale.
-  data.numOps(uData.getMinScale(), uData.getMaxScale());
+  data.setNumOps(uData.getMinScale(), uData.getMaxScale());
 
   //print the number of operations to be performed.
-  std::cout << "The number of operations to be performed is: " << data.getCurvatureArrayLength() << std::endl;
+  std::cout << "The number of operations to be performed is: " << data.getNumOps() << std::endl;
 
   //standard or hybrid analysis?
   bool analysisType = cliInput::getYesNo("Would you like to perform a hybrid analysis?");

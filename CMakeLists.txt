@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(multiscale-curvature-analysis)
 
 
+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -15,8 +16,6 @@ FetchContent_Declare(
 # Make wxWidgets available
 FetchContent_MakeAvailable(wxWidgets)
 
-
-
 add_executable(main main.cpp)
 
 add_library(fileHandler fileHandler.cpp)
@@ -27,4 +26,11 @@ add_library(dataContainer dataContainer.cpp)
 add_library(userInputCLI userInputCLI.cpp)
 add_library(gui gui.cpp)
 
+find_package(OpenMP REQUIRED)
+if (OpenMP_CXX_FOUND)
+    target_link_libraries(analysis PRIVATE OpenMP::OpenMP_CXX)
+endif()
+
+
 target_link_libraries(main PRIVATE wx::core wx::base fileHandler formula userData analysis dataContainer userInputCLI gui)
+

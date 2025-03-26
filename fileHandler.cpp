@@ -87,63 +87,56 @@ void FileHandler::fileRead(string input, DataContainer* data) {
 }
 
 // Function is meant to write data to a CSV file
-int FileHandler::fileWrite(UserData* uData, string fileName){
-    
-    // Get the DataContainer object from the UserData object
+int FileHandler::fileWrite(UserData* uData, string fileName) {
     DataContainer* XSC = uData->getDataContainer();
-
-
-    // Mar 18 2025: three lines below were removed to allow for file name to be passed in as a parameter
-    // std::string fileName;
-    // std::cout << "Enter file Name: ";
-    // std::cin >> fileName;
-
-    fileName += ".csv";
-    std::ofstream myFile(fileName); // Creates or overwrites file
-    
-    if (myFile.is_open()) {
-        int ScaleSwitching = 0;
-        int CurvatureSwitching;
-        int64_t BroadArraySize = XSC->getCurvatureArrayLength(); // Length of the Array holding ALL of the Curvature Data
-        int CurvatureArraySize; // Length of the Array holding the Curvature Data for a Specific Scale
-        myFile << "X-Position" << "," << "Scale" << "," << "Curvature" << std::endl;
-        std::cout<<"broad array size is: "<< BroadArraySize << std::endl;
-        while (ScaleSwitching < BroadArraySize) {
-            CurvatureArraySize = XSC->getIndex(ScaleSwitching)->getLength(); //gets the length of the array corresponding to a particular scale
-            std::cout<<"CurvArraySize: " << CurvatureArraySize<< std::endl; // for debugging purposes
-            CurvatureSwitching = 0; // Resetting the index for Array of points
-            std::cout<<XSC->getIndex(ScaleSwitching)<<std::endl;
-            while (CurvatureSwitching < CurvatureArraySize){
-                std::cout<<"write a curvature"<<std::endl;
-                std::cout<<"scaleswitch is: "<< ScaleSwitching<<std::endl;
-                std::cout<<"curvatureswitch is: "<< CurvatureSwitching<<std::endl;
-
-                std::cout<<"curvature written was:"<<std::endl;
-                std::cout<< "X"<<XSC->getPointAddress(CurvatureSwitching+ScaleSwitching+uData->getMinScale())->x << std::endl;
-                std::cout<< "S"<<XSC->getIndex(ScaleSwitching)->getScale() * XSC->getMinLength()  << std::endl;
-                std::cout<< "C"<<XSC->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
-                
-                myFile << XSC->getPointAddress(CurvatureSwitching+ScaleSwitching+uData->getMinScale())->x<< "," 
-                       << XSC->getIndex(ScaleSwitching)->getScale() * XSC->getMinLength() << "," 
-                       << XSC->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << std::endl;
-
-               
-                CurvatureSwitching++; // Changing the index for Array of points
-            }
-            
-            ScaleSwitching++; // Changing the index for Array of Curvature Data
-            std::cout<<"scaleswitch: "<< ScaleSwitching<<std::endl;
-            std::cout<<"broadarraysize"<< BroadArraySize<<std::endl;
-        }
-
-        myFile.close();
-        std::cout << "Data written to file successfully." << std::endl;
-    } 
-    else {
-        std::cerr << "Unable to open file." << std::endl;
-        return 1; // Indicate an error
+    if (XSC == nullptr) {
+        std::cerr << "Error: DataContainer is null." << std::endl;
+        return 1;
     }
 
+    int BroadArraySize = XSC->getCurvatureArrayLength();
+    if (BroadArraySize <= 0) {
+        std::cerr << "Error: Invalid BroadArraySize." << std::endl;
+        return 1;
+    }
+
+    fileName += ".csv";
+
+    std::ofstream myFile(fileName, std::ios::out | std::ios::trunc);
+    if (!myFile.is_open()) {
+        std::cerr << "Unable to open file." << std::endl;
+        return 1;
+    }
+
+
+    // Use a stringstream as a buffer
+    std::ostringstream buffer;
+    buffer << "X-Position,Scale,Curvature\n";
+
+    int ScaleSwitching = 0;
+    while (ScaleSwitching < BroadArraySize) {
+        int CurvatureArraySize = XSC->getIndex(ScaleSwitching)->getLength();
+        if (CurvatureArraySize <= 0) {
+            std::cerr << "Error: Invalid CurvatureArraySize at index " << ScaleSwitching << "." << std::endl;
+            return 1;
+        }
+
+        int CurvatureSwitching = 0;
+        while (CurvatureSwitching < CurvatureArraySize) {
+            buffer << XSC->getPointAddress(CurvatureSwitching + ScaleSwitching + uData->getMinScale())->x << ","
+                   << XSC->getIndex(ScaleSwitching)->getScale() * XSC->getMinLength() << ","
+                   << XSC->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << "\n";
+
+            CurvatureSwitching++;
+        }
+        ScaleSwitching++;
+    }
+
+    // Write the entire buffer to the file at once
+    myFile << buffer.str();
+    myFile.close();
+
+    std::cout << "Data written to file successfully." << std::endl;
     return 0;
 }
 

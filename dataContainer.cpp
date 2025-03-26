@@ -93,8 +93,11 @@ int DataContainer::getPointArrayLength() {
     return pointArrayLength;
 }
 
-int64_t DataContainer::getCurvatureArrayLength() {
+int DataContainer::getCurvatureArrayLength() {
     return curvatureArrayLength;
+}
+int64_t DataContainer::getNumOps() {
+    return numOps;
 }
 
 double DataContainer::getMinLength() {
@@ -192,7 +195,7 @@ void DataContainer::setmaxhalfinterval(){
 
 // this function takes in the maximum measurement parameters from the function defined above, as well as the user's preferred measurement parameters in order
 // to determine how many curvatures will be calculated (Number of Operations: numops)
-void DataContainer::numOps(const int& minScale, const int& maxScale){
+void DataContainer::setNumOps(const int& minScale, const int& maxScale){
     int64_t retval;
     //formula is different for calculating the number of operations if the data is odd or even.
     int minops = (DataContainer::pointArrayLength - 2*minScale);
@@ -235,6 +238,7 @@ void DataContainer::numOps(const int& minScale, const int& maxScale){
         }
 
         DataContainer::curvatureArrayLength = maxScale - minScale + 1;
+        DataContainer::numOps = retval;
     } catch (const std::bad_alloc& e) {
         std::cerr << "Memory allocation failed: " << e.what() << std::endl;
     } catch (const std::invalid_argument& e) {
