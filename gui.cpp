@@ -17,3 +17,14 @@ class App : public wxApp {
     };
      
     wxIMPLEMENT_APP(App);
+int main(){
+
+    //launch the GUI
+    wxApp::SetInstance(new App());
+    wxEntryStart(0, nullptr);
+    wxTheApp->OnInit();
+    wxTheApp->OnRun();
+    wxEntryCleanup();
+    
+    return 0;
+}
