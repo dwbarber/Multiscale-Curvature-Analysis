@@ -3,6 +3,7 @@
 class App : public wxApp {
     public:
         bool OnInit() {
+            std::cout<<"GUI Test"<<std::endl;
             wxFrame* window = new wxFrame(NULL, wxID_ANY, "GUI Test", wxDefaultPosition, wxSize(600, 400));
             wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
             wxStaticText* text = new wxStaticText(window, wxID_ANY, "Well Done!\nEverything seems to be working",
