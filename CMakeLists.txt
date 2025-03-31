@@ -41,7 +41,9 @@ if (OpenMP_CXX_FOUND)
 endif()
 
 
+
 target_link_libraries(main PRIVATE fileHandler formula userData analysis dataContainer userInputCLI)
+
 
 # set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -pthread")
