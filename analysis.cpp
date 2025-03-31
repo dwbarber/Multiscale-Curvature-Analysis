@@ -41,7 +41,7 @@ void analysis::hybridAnalysis(UserData* uData, DataContainer* data, double (*met
     int maxScale = uData->getMaxScale();
     
     //determine if points are acute
-
+    #pragma omp parallel for private(curvature) schedule(dynamic)
     for(int scale = minScale; scale <= maxScale; scale++){ //iterate over scales
         for(int point = scale; point < numPoints - scale; point++){ //iterate over points
             // point is the center point 
