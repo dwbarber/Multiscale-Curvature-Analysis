@@ -5,16 +5,26 @@ project(multiscale-curvature-analysis)
 
 
 
-# include(FetchContent)
+include(FetchContent)
+# Fetch Dear ImGui
+FetchContent_Declare(
+    imgui
+    GIT_REPOSITORY https://github.com/ocornut/imgui.git
+    GIT_TAG v1.91.9b # Use the latest or a specific version
+)
+FetchContent_MakeAvailable(imgui)
 
-# FetchContent_Declare(
-#     wxWidgets
-#     GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
-#     GIT_TAG        v3.2.7.1 # Replace with the desired version or branch
-# )
+# Add ImGui to your project
+add_library(imgui STATIC
+    ${imgui_SOURCE_DIR}/imgui.cpp
+    ${imgui_SOURCE_DIR}/imgui_draw.cpp
+    ${imgui_SOURCE_DIR}/imgui_tables.cpp
+    ${imgui_SOURCE_DIR}/imgui_widgets.cpp
+    ${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp  # If using GLFW
+    ${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp  # If using OpenGL
+)
 
-# Make wxWidgets available
-# FetchContent_MakeAvailable(wxWidgets)
+target_include_directories(imgui PUBLIC ${imgui_SOURCE_DIR} ${imgui_SOURCE_DIR}/backends)
 
 add_executable(main main.cpp)
 
@@ -24,7 +34,6 @@ add_library(userData userData.cpp)
 add_library(analysis analysis.cpp)
 add_library(dataContainer dataContainer.cpp)
 add_library(userInputCLI userInputCLI.cpp)
-add_library(gui gui.cpp)
 
 find_package(OpenMP REQUIRED)
 if (OpenMP_CXX_FOUND)
@@ -32,5 +41,9 @@ if (OpenMP_CXX_FOUND)
 endif()
 
 
-target_link_libraries(main fileHandler formula userData analysis dataContainer userInputCLI gui)
 
+target_link_libraries(main PRIVATE fileHandler formula userData analysis dataContainer userInputCLI)
+
+
+# set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -pthread")
