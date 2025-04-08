@@ -56,6 +56,26 @@ void CurvatureScale::setCurvature(double curvature, int index) {
     this->curvatureArray[index] = curvature;
 }
 
+void  CurvatureScale::setPercentErrorArray(double* PercentErrorArray, int dataLength){
+    delete[] CurvatureScale::percentErrorArray;
+    CurvatureScale::percentErrorArray = new double[dataLength];
+    memcpy(CurvatureScale::percentErrorArray, percentErrorArray, dataLength * sizeof(double));
+
+}
+
+void  CurvatureScale::setPercentErrorArray(int dataLength){
+    delete[] CurvatureScale::percentErrorArray;
+    CurvatureScale::percentErrorArray = new double[dataLength];
+    CurvatureScale::dataLength = dataLength;
+
+}
+
+void  CurvatureScale::setPercentError(double curvature, int index){
+    this->percentErrorArray[index] = curvature;
+
+}
+
+
 void CurvatureScale::setScale(int scale) {
     CurvatureScale::scale = scale;
 }

@@ -42,6 +42,15 @@ class CurvatureScale {
         // sets curvature at index
         void setCurvature(double curvature, int index);
         
+        
+        // sets the percentErrorArray from an external array
+        void setPercentErrorArray(double* PercentErrorArray, int dataLength);
+        void setPercentErrorArray(int dataLength);
+
+        // sets percentError at index
+        void setPercentError(double curvature, int index);
+
+
         /**
         * Function: setScale()
         * Sets the value of the scale parameter
@@ -52,6 +61,7 @@ class CurvatureScale {
     private:
         int scale;
         double* curvatureArray;
+        double* percentErrorArray;
         point* pointArray;
         int dataLength;
 
@@ -73,9 +83,6 @@ class DataContainer {
         CurvatureScale* getIndex(int index);
         CurvatureScale* getScale(double scale);
         int getCurvatureArrayLength();
-
-
-
 
         point getPoint(int index);
         int getPointArrayLength();

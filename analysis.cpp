@@ -64,3 +64,25 @@ void analysis::hybridAnalysis(UserData* uData, DataContainer* data, double (*met
 }
 
 
+void analysis::percentError(UserData* uData, DataContainer* data, double (*method1)(point*,point*,point*),int numPoints){
+
+    std::cout << "Percent Error" << std::endl;
+        
+    //populate cuvatureScaleArray
+    double percentError;
+    int minScale = uData->getMinScale();
+    int maxScale = uData->getMaxScale();
+    
+    //determine if points are acute
+    #pragma omp parallel for private(curvature) schedule(dynamic)
+
+    for(int scale = minScale; scale <= maxScale; scale++){ //iterate over scales
+        for(int point = scale; point < numPoints - scale; point++){ //iterate over points
+            //determine percent Error:
+            float percentError = (1);//FLAG: Change to formula
+
+            data->putData(scale-minScale, point-scale, percentError); //add curvature to data
+        }
+    }
+}
+
