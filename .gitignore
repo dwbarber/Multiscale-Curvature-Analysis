@@ -42,6 +42,9 @@ Makefile
 *.swp
 *.swo
 *.swn
+*.cpp.*
+
+
 ./build/
 .vscode/settings.json
 ./build/*
