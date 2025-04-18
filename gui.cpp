@@ -1,4 +1,4 @@
-#include"gui.h"
+#include "gui.h"
 
 class App : public wxApp {
     public:
