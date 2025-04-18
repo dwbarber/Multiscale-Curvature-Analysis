@@ -13,10 +13,6 @@ CurvatureScale::CurvatureScale(double *curvatureArray, int dataLength, double sc
     CurvatureScale::dataLength = dataLength;
 }
 
-CurvatureScale::CurvatureScale() {
-    curvatureArray = new double[10];
-}
-
 // Getters
 
 double CurvatureScale::getCurvature(int index) {
@@ -35,13 +31,22 @@ point CurvatureScale::getPoint(int index) {
     return pointArray[index];
 }
 
+//These silly functions just initiate the arrays to be overwritten later
+CurvatureScale::CurvatureScale() {
+    curvatureArray = new double[10];
+}
+
+CurvatureScale::PercentError() {
+    curvatureArray = new double[10];
+}
+
 // Setters
 
-void CurvatureScale::setCurvatureArray(double* curvatureArray, int dataLength) {
-    delete[] CurvatureScale::curvatureArray;
-    CurvatureScale::curvatureArray = new double[dataLength];
-    memcpy(CurvatureScale::curvatureArray, curvatureArray, dataLength * sizeof(double));
-}
+//void CurvatureScale::setCurvatureArray(double* curvatureArray, int dataLength) {
+//    delete[] CurvatureScale::curvatureArray;
+//    CurvatureScale::curvatureArray = new double[dataLength];
+//    memcpy(CurvatureScale::curvatureArray, curvatureArray, dataLength * sizeof(double));
+//} //FLAG: Commented bcs we think its unneccessary
 
 void CurvatureScale::setCurvatureArray(int dataLength) {
     delete[] CurvatureScale::curvatureArray;
@@ -56,12 +61,12 @@ void CurvatureScale::setCurvature(double curvature, int index) {
     this->curvatureArray[index] = curvature;
 }
 
-void  CurvatureScale::setPercentErrorArray(double* PercentErrorArray, int dataLength){
-    delete[] CurvatureScale::percentErrorArray;
-    CurvatureScale::percentErrorArray = new double[dataLength];
-    memcpy(CurvatureScale::percentErrorArray, percentErrorArray, dataLength * sizeof(double));
-
-}
+//void  CurvatureScale::setPercentErrorArray(double* PercentErrorArray, int dataLength){
+//    delete[] CurvatureScale::percentErrorArray;
+//    CurvatureScale::percentErrorArray = new double[dataLength];
+//    memcpy(CurvatureScale::percentErrorArray, percentErrorArray, dataLength * sizeof(double));
+//
+//} //FLAG: Commented bcs we think its unneccessary
 
 void  CurvatureScale::setPercentErrorArray(int dataLength){
     delete[] CurvatureScale::percentErrorArray;
@@ -139,7 +144,13 @@ void DataContainer::setIndex(int index, CurvatureScale* data) {
 void DataContainer::setPoint(int index, point point) {
     pointArray[index] = point;
 }
-void DataContainer::putData(int scale, int index, double curvature) {
+void DataContainer::putCurvature(int scale, int index, double curvature) {
+    this->curvatureScaleArray[scale].setCurvature(curvature, index); // puts the data into the array for a particular scale
+    // std::cout<<this->curvatureScaleArray[scale].getCurvature(index)<<std::endl; //check if data is actually being put correctly
+    // std::cout<<this->curvatureScaleArray[scale].getLength()<<std::endl;
+}
+
+void DataContainer::putPE(int scale, int index, double percentError) {
     this->curvatureScaleArray[scale].setCurvature(curvature, index); // puts the data into the array for a particular scale
     // std::cout<<this->curvatureScaleArray[scale].getCurvature(index)<<std::endl; //check if data is actually being put correctly
     // std::cout<<this->curvatureScaleArray[scale].getLength()<<std::endl;

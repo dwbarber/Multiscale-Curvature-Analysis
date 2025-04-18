@@ -26,7 +26,7 @@ void analysis::singleAnalysis(UserData* uData, DataContainer* data, double (*met
             // Call the function on the points
             curvature = method( data->getPointAddress(point - scale), data->getPointAddress(point), data->getPointAddress(point + scale)); 
             // Store the result in the data container
-            data->putData(scale - minScale, point-scale, curvature); //add curvature to data
+            data->putCurvature(scale - minScale, point-scale, curvature); //add curvature to data
         }
     }
 }
@@ -55,12 +55,14 @@ void analysis::hybridAnalysis(UserData* uData, DataContainer* data, double (*met
             else{
                 curvature = method2( data->getPointAddress(point - scale), data->getPointAddress(point), data->getPointAddress(point + scale)); 
             }
-            data->putData(scale-minScale, point-scale, curvature); //add curvature to data
+
+            data->putCurvature(scale-minScale, point-scale, curvature); //add curvature to data
         }
     }
 }
 
-void analysis::percentError(UserData* uData, DataContainer* data, double (*method1)(point*,point*,point*),int numPoints){
+
+void analysis::percentError(UserData* uData, DataContainer* data,int numPoints){
 
     std::cout << "Percent Error" << std::endl;
         
@@ -69,15 +71,14 @@ void analysis::percentError(UserData* uData, DataContainer* data, double (*metho
     int minScale = uData->getMinScale();
     int maxScale = uData->getMaxScale();
     
-    //determine if points are acute
-    #pragma omp parallel for private(curvature) schedule(dynamic)
+    #pragma omp parallel for 
 
     for(int scale = minScale; scale <= maxScale; scale++){ //iterate over scales
         for(int point = scale; point < numPoints - scale; point++){ //iterate over points
             //determine percent Error:
-            float percentError = (1);//FLAG: Change to formula
+            float percentError = //FLAG: Change to formula
 
-            data->putData(scale-minScale, point-scale, percentError); //add curvature to data
+            data->putPE(scale-minScale, point-scale, percentError); //add curvature to data
         }
     }
 }

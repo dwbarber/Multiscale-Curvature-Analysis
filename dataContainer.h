@@ -93,7 +93,8 @@ class DataContainer {
         double getmaxHalfIntervalPossible();
         // setters
         void setIndex(int index, CurvatureScale* data);
-        void putData(int scale, int index, double curvature);
+        void putCurvature(int scale, int index, double curvature);
+        void putPE(int scale, int index, double percentError);
         void setPointArray(point *pointArray, int dataLength);
         void setPointArray(int dataLength);
         void setCurvatureScaleArray(int dataLength);
