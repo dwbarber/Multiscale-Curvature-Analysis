@@ -76,7 +76,7 @@ void analysis::percentError(UserData* uData, DataContainer* data,int numPoints){
     for(int scale = minScale; scale <= maxScale; scale++){ //iterate over scales
         for(int point = scale; point < numPoints - scale; point++){ //iterate over points
             //determine percent Error:
-            float percentError = //FLAG: Change to formula
+            float percentError = 0;//FLAG: Change to formula
 
             data->putPE(scale-minScale, point-scale, percentError); //add curvature to data
         }
