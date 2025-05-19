@@ -108,7 +108,6 @@ int FileHandler::fileWrite(UserData* uData, string fileName) {
         return 1;
     }
 
-
     // Use a stringstream as a buffer
     std::ostringstream buffer;
     buffer << "X-Position,Scale,Curvature\n";

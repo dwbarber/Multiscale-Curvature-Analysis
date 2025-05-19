@@ -36,8 +36,12 @@ CurvatureScale::CurvatureScale() {
     curvatureArray = new double[10];
 }
 
-CurvatureScale::PercentError() {
-    curvatureArray = new double[10];
+void CurvatureScale::setPercentErrorArray(double* PercentErrorArray, int dataLength) {
+    curvatureArray = new double[dataLength];
+}
+
+void CurvatureScale::setPercentErrorArray(int dataLength) {
+    curvatureArray = new double[dataLength];
 }
 
 // Setters

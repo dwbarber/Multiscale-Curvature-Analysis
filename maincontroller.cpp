@@ -51,12 +51,12 @@ void MainController::mainLoop(void){
                         //get user input for the first time
                         //get file path
                         uData.setInputFilePath(cliInput::getString("Please enter the file path"));
-                        point* pointArray = FileHandler::fileRead(uData.getInputFilePath());
+                        point* pointArray = FileHandler::fileRead(uData.getInputFilePath()); // why is this not using a second constructor?
                         if(pointArray == nullptr){
                             std::cout << "Invalid file path";
                         }
                         else{
-                            data.initDataZero(pointArray);
+                            //data.initDataZero(pointArray);
                             std::cout << " Enter minimum scale" << std::endl;
                             double minScale;
                             double maxScale;
