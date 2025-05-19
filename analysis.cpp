@@ -81,5 +81,25 @@ void analysis::percentError(UserData* uData, DataContainer* data,int numPoints){
             data->putPE(scale-minScale, point-scale, percentError); //add curvature to data
         }
     }
+
+    int BroadArraySize = data->getCurvatureArrayLength();
+    int ScaleSwitching = 0;
+    while (ScaleSwitching < BroadArraySize) {
+        int CurvatureArraySize = data->getIndex(ScaleSwitching)->getLength();
+        // if (CurvatureArraySize <= 0) {
+        //     std::cerr << "Error: Invalid CurvatureArraySize at index " << ScaleSwitching << "." << std::endl;
+        // }
+
+        int CurvatureSwitching = 0;
+        while (CurvatureSwitching < CurvatureArraySize) {
+            // X position : data->getPointAddress(CurvatureSwitching + ScaleSwitching + uData->getMinScale())->x << ","
+            //      Scale : data->getIndex(ScaleSwitching)->getScale() * data->getMinLength() << ","
+            // Curvature  : data->getIndex(ScaleSwitching)->getCurvature(CurvatureSwitching) << "\n";
+
+            CurvatureSwitching++;
+        }
+        ScaleSwitching++;
+    }
+
 }
 

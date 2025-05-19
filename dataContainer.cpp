@@ -151,7 +151,7 @@ void DataContainer::putCurvature(int scale, int index, double curvature) {
 }
 
 void DataContainer::putPE(int scale, int index, double percentError) {
-    this->curvatureScaleArray[scale].setCurvature(curvature, index); // puts the data into the array for a particular scale
+    this->curvatureScaleArray[scale].setCurvature(percentError, index); // puts the data into the array for a particular scale
     // std::cout<<this->curvatureScaleArray[scale].getCurvature(index)<<std::endl; //check if data is actually being put correctly
     // std::cout<<this->curvatureScaleArray[scale].getLength()<<std::endl;
 }
