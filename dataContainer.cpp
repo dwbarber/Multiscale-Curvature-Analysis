@@ -36,13 +36,13 @@ CurvatureScale::CurvatureScale() {
     curvatureArray = new double[10];
 }
 
-void CurvatureScale::setPercentErrorArray(double* PercentErrorArray, int dataLength) {
-    curvatureArray = new double[dataLength];
-}
+//void CurvatureScale::setPercentErrorArray(double* PercentErrorArray, int dataLength) {
+//    curvatureArray = new double[dataLength];
+//}
 
-void CurvatureScale::setPercentErrorArray(int dataLength) {
-    curvatureArray = new double[dataLength];
-}
+//void CurvatureScale::setPercentErrorArray(int dataLength) {
+    //curvatureArray = new double[dataLength];
+//}
 
 // Setters
 
@@ -76,7 +76,6 @@ void  CurvatureScale::setPercentErrorArray(int dataLength){
     delete[] CurvatureScale::percentErrorArray;
     CurvatureScale::percentErrorArray = new double[dataLength];
     CurvatureScale::dataLength = dataLength;
-
 }
 
 void  CurvatureScale::setPercentError(double curvature, int index){
