@@ -12,7 +12,6 @@
 using namespace std;
 
 
-
 void MainController::mainLoop(void){
     std::string commandinput;
     char success;

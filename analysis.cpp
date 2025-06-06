@@ -27,7 +27,13 @@ void analysis::singleAnalysis(UserData* uData, DataContainer* data, double (*met
             curvature = method( data->getPointAddress(point - scale), data->getPointAddress(point), data->getPointAddress(point + scale)); 
             // Store the result in the data container
             data->putCurvature(scale - minScale, point-scale, curvature); //add curvature to data
+
+            // statistics
+
         }
+
+        // scale curvature average
+
     }
 }
 
