@@ -1,3 +1,4 @@
+#include <string>
 #pragma once
 #ifndef MAINCONTROLLER_H
 #define MAINCONTROLLER_H

@@ -13,14 +13,14 @@ using namespace std;
 FileHandler::FileHandler() {}
 
 // Function is meant to read a CSV file and return an array of points
-void FileHandler::fileRead(string input, DataContainer* data) {
+char FileHandler::fileRead(string input, DataContainer* data) {
     std::cout<<"reading file"<<std::endl;
     string filePath = remove_quotes(input); // Remove quotes from the input string
 
     // Check if the file exists
     if (!validPath(filePath)) {
         std::cerr << "Error: File does not exist!" << std::endl;
-        return;
+        return 0;
     }
 
     // Check if the file extension is ".csv"
@@ -28,13 +28,14 @@ void FileHandler::fileRead(string input, DataContainer* data) {
     if (pathExtension(filePath) != ".csv" && pathExtension(filePath) != ".txt" && pathExtension(filePath) != ".x3p") {
         std::cerr << "Error: Invalid file type! Expected a .csv file." << std::endl;
         std::cerr << pathExtension(filePath) << std::endl;
-        return;
+        return 0;
     }
 
     std::ifstream file(filePath); // Open file
     if (!file.is_open()) {
         std::cerr << "Error opening file!" << std::endl;
-        return;        }
+        return 0;
+    }
     else{
         // First loop: Count the number of lines
         std::string line;
@@ -74,6 +75,7 @@ void FileHandler::fileRead(string input, DataContainer* data) {
 
         file.close(); 
 
+
         // //Print the points read from the file and file type, use for TESTING
         // std::cout << "File Type: " << pathExtension(filePath) << std::endl;
         // ite = 0;
@@ -83,6 +85,7 @@ void FileHandler::fileRead(string input, DataContainer* data) {
         // }
 
         std::cout << "Data was read successfully.\n";
+        return 1;
     }
 }
 

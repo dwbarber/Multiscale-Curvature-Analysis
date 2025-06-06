@@ -11,7 +11,7 @@ class FileHandler{
     public:
         FileHandler();
     	static int validateType();
-        static void fileRead(std::string input, DataContainer* data); 
+        static char fileRead(std::string input, DataContainer* data); 
         static int fileWrite(UserData* uData, std::string fileName);
         static bool validPath(const std::string& path);
         static std::string pathExtension(const std::string& path);

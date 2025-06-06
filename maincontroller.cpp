@@ -14,6 +14,8 @@ using namespace std;
 
 
 void MainController::mainLoop(void){
+    std::string commandinput;
+    char success;
     switch(currentState){
         //prints startup message, sets progstate to idle
         case START:
@@ -42,7 +44,7 @@ void MainController::mainLoop(void){
         case ANALYZE:
             std::cout << "Running analysis";
                 UserData uData;
-                DataContainer data;
+                DataContainer* data;
                 switch(currentAnalysisState){
                     case NEWANALYSIS:
                         currentAnalysisState = USERINPUT;
@@ -51,8 +53,8 @@ void MainController::mainLoop(void){
                         //get user input for the first time
                         //get file path
                         uData.setInputFilePath(cliInput::getString("Please enter the file path"));
-                        point* pointArray = FileHandler::fileRead(uData.getInputFilePath()); // why is this not using a second constructor?
-                        if(pointArray == nullptr){
+                        success = FileHandler::fileRead(uData.getInputFilePath(), data); // why is this not using a second constructor?
+                        if(success == 0){
                             std::cout << "Invalid file path";
                         }
                         else{
@@ -65,7 +67,7 @@ void MainController::mainLoop(void){
                             std::cin >> maxScale;
 
                             if(uData.setScaleBounds(minScale, maxScale)!= 0){
-                                //AAAAAH USER SCALE IS WRONG
+                                std::cout << "Invalid Scale Bounds"; //AAAAAH USER SCALE IS WRONG
                                 }
                             else{
                             std::cout << "would you like your analysis to be hybrid enter Yes/No?" << endl;
