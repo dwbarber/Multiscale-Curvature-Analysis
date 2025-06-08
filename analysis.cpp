@@ -7,6 +7,7 @@
 #include <string>
 #include <functional>
 #include <stdexcept>
+#include <algorithm>
 
 void analysis::singleAnalysis(UserData* uData, DataContainer* data, double (*method)(point*,point*,point*), int numPoints){
     //inputs: data, pointer to desired analysis method
@@ -28,7 +29,25 @@ void analysis::singleAnalysis(UserData* uData, DataContainer* data, double (*met
             // Store the result in the data container
             data->putCurvature(scale - minScale, point-scale, curvature); //add curvature to data
 
-            // statistics
+            if (curvature > 0){
+                data->setAvgPos(((data->getAvgPos() * data->getPosAvgDenominator()) + curvature) / (data->getPosAvgDenominator() + 1));
+                data->setPosAvgDenominator(data->getPosAvgDenominator() + 1);
+            }
+
+            else if (curvature < 0){
+                data->setAvgPos(((data->getAvgNeg() * data->getNegAvgDenominator()) + curvature) / (data->getNegAvgDenominator() + 1));
+                data->setNegAvgDenominator(data->getNegAvgDenominator() + 1);
+            }
+
+            data->updateFiveExtremes(curvature, data->getPointAddress(point)->x); //update five extremes
+
+            if (data->getAbsMin() == 0 || curvature < data->getAbsMin()) {
+                data->setAbsMin(curvature); //update absolute minimum
+            }
+
+            if (data->getAbsMax() == 0 || curvature > data->getAbsMax()) {
+                data->setAbsMax(curvature); //update absolute maximum
+            }
 
         }
 
@@ -63,6 +82,27 @@ void analysis::hybridAnalysis(UserData* uData, DataContainer* data, double (*met
             }
 
             data->putCurvature(scale-minScale, point-scale, curvature); //add curvature to data
+
+            if (curvature > 0){
+                data->setAvgPos(((data->getAvgPos() * data->getPosAvgDenominator()) + curvature) / (data->getPosAvgDenominator() + 1));
+                data->setPosAvgDenominator(data->getPosAvgDenominator() + 1);
+            }
+
+            else if (curvature < 0){
+                data->setAvgPos(((data->getAvgNeg() * data->getNegAvgDenominator()) + curvature) / (data->getNegAvgDenominator() + 1));
+                data->setNegAvgDenominator(data->getNegAvgDenominator() + 1);
+            }
+
+            data->updateFiveExtremes(curvature, data->getPointAddress(point)->x); //update five extremes
+
+            if (data->getAbsMin() == 0 || curvature < data->getAbsMin()) {
+                data->setAbsMin(curvature); //update absolute minimum
+            }
+
+            if (data->getAbsMax() == 0 || curvature > data->getAbsMax()) {
+                data->setAbsMax(curvature); //update absolute maximum
+            }
+            
         }
     }
 }

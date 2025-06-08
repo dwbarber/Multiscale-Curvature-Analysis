@@ -72,7 +72,10 @@ class DataContainer {
     public:
 
         // Constructors 
-        DataContainer() : pointArray(nullptr), curvatureScaleArray(nullptr), pointArrayLength(0), curvatureArrayLength(0), minLength(0), maxHalfIntervalPossible(0), odd(false) {}
+        DataContainer() : pointArray(nullptr), curvatureScaleArray(nullptr), pointArrayLength(0), 
+                          curvatureArrayLength(0), minLength(0), maxHalfIntervalPossible(0), odd(false), 
+                          min(0), max(0), avgPos(0), posAvgDenominator(0), avgNeg(0), negAvgDenominator(0), 
+                          fiveExtremes{0, 0} {}
 
         DataContainer(point* pointArray, int dataLength);
         
@@ -91,6 +94,7 @@ class DataContainer {
         double getMinLength();
         double getMaxLength();
         double getmaxHalfIntervalPossible();
+
         // setters
         void setIndex(int index, CurvatureScale* data);
         void putCurvature(int scale, int index, double curvature);
@@ -102,6 +106,26 @@ class DataContainer {
         void setmaxhalfinterval();
         void setNumOps(const int& minScale, const int& maxScale);        
         
+        // Statistics functions ----------------------------------------------------------------------------------------------
+
+        // Setters
+        void setAbsMin(double value) {}
+        void setAbsMax(double value) {}
+        void setAvgPos(double value) {}
+        void setPosAvgDenominator (int value) {}
+        void setAvgNeg(double value) {}
+        void setNegAvgDenominator (int value) {}
+        void updateFiveExtremes(double curvature, double pos) {}
+
+        // Getters
+        double getAbsMin() const {}
+        double getAbsMax() const {}
+        double getAvgPos() const {}
+        double getPosAvgDenominator() const {} 
+        double getAvgNeg() const {}
+        double getNegAvgDenominator() const {}
+        point** getFiveExtremes() {}
+
         friend class UserData;
         
     private:
@@ -121,6 +145,14 @@ class DataContainer {
 
         //Property of analysis
         int64_t numOps;
+
+        double min;
+        double max;
+        double avgPos;
+        double posAvgDenominator;    
+        double avgNeg;
+        double negAvgDenominator;
+        point* fiveExtremes[5];
 
         
 };

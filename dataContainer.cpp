@@ -279,3 +279,50 @@ void DataContainer::setNumOps(const int& minScale, const int& maxScale){
         std::cerr << "Invalid argument: " << e.what() << std::endl;
     }
 }
+
+//  Statistics functions --------------------------------------------------------------------------------------------------------------
+
+void DataContainer::setAbsMin(double value) { min = value; }
+void DataContainer::setAbsMax(double value) { max = value; }
+void DataContainer::setAvgPos(double value) { avgPos = value; }
+void DataContainer::setPosAvgDenominator (int value) { posAvgDenominator = value; }
+void DataContainer::setAvgNeg(double value) { avgNeg = value; }
+void DataContainer::setNegAvgDenominator (int value) { negAvgDenominator = value; }
+void DataContainer::updateFiveExtremes(double curvature, double pos) {
+    // This function updates the five extremes based on the curvature and position
+    // For simplicity, we assume fiveExtremes is an array of pointers to points
+    // This is a placeholder implementation; actual logic will depend on requirements
+    if (fiveExtremes[0] == nullptr || abs(curvature) < abs(fiveExtremes[0]->z)) {
+        fiveExtremes[0] = new point{curvature, pos};
+    }
+    // Additional logic to update other extremes would go here
+
+    for (int i = 0; i < 4; ++i) {
+        int minIndex = i;
+        for (int j = i + 1; j < 5; ++j) {
+            if (abs(fiveExtremes[j]->z) < abs(fiveExtremes[i]->z))
+                minIndex = j;
+        }
+        std::swap(fiveExtremes[i], fiveExtremes[minIndex]);
+    }
+
+}
+
+void sortArrayAscending(double arr[], int size) {
+    for (int i = 0; i < size - 1; ++i) {
+        int minIndex = i;
+        for (int j = i + 1; j < size; ++j) {
+            if (arr[j] < arr[minIndex])
+                minIndex = j;
+        }
+        std::swap(arr[i], arr[minIndex]);
+    }
+}
+
+double DataContainer::getAbsMin() const { return min; }
+double DataContainer::getAbsMax() const { return max; }
+double DataContainer::getAvgPos() const { return avgPos; }
+double DataContainer::getPosAvgDenominator() const { return posAvgDenominator; }
+double DataContainer::getAvgNeg() const { return avgNeg; }
+double DataContainer::getNegAvgDenominator() const { return negAvgDenominator; }
+point** DataContainer::getFiveExtremes() { return fiveExtremes; }
