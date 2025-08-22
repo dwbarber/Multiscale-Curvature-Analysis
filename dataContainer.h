@@ -109,22 +109,22 @@ class DataContainer {
         // Statistics functions ----------------------------------------------------------------------------------------------
 
         // Setters
-        void setAbsMin(double value) {}
-        void setAbsMax(double value) {}
-        void setAvgPos(double value) {}
-        void setPosAvgDenominator (int value) {}
-        void setAvgNeg(double value) {}
-        void setNegAvgDenominator (int value) {}
-        void updateFiveExtremes(double curvature, double pos) {}
+        void setAbsMin(double value);
+        void setAbsMax(double value);
+        void setAvgPos(double value);
+        void setPosAvgDenominator (int value);
+        void setAvgNeg(double value);
+        void setNegAvgDenominator (int value);
+        void updateFiveExtremes(double curvature, double pos);
 
         // Getters
-        double getAbsMin() const {}
-        double getAbsMax() const {}
-        double getAvgPos() const {}
-        double getPosAvgDenominator() const {} 
-        double getAvgNeg() const {}
-        double getNegAvgDenominator() const {}
-        point** getFiveExtremes() {}
+        double getAbsMin() const ;
+        double getAbsMax() const;
+        double getAvgPos() const;
+        double getPosAvgDenominator() const;
+        double getAvgNeg() const;
+        double getNegAvgDenominator() const;
+        point** getFiveExtremes();
 
         friend class UserData;
         

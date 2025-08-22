@@ -319,8 +319,8 @@ void sortArrayAscending(double arr[], int size) {
     }
 }
 
-double DataContainer::getAbsMin() const { return min; }
-double DataContainer::getAbsMax() const { return max; }
+double DataContainer::getAbsMin() const  {return min; }
+double DataContainer::getAbsMax() const  { return max; }
 double DataContainer::getAvgPos() const { return avgPos; }
 double DataContainer::getPosAvgDenominator() const { return posAvgDenominator; }
 double DataContainer::getAvgNeg() const { return avgNeg; }
